@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio - 私のポートフォリオ</title>
+    <meta name="description" content="[sakazaki_tu]のポートフォリオサイト。これまでのプロジェクト実績やスキルを紹介しています。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        /* Dark mode styles */
+        .dark body {
+            background-color: #1f2937; /* gray-800 */
+            color: #f3f4f6; /* gray-100 */
+        }
+        .dark .bg-white { background-color: #374151 !important; /* gray-700 */ }
+        .dark .bg-gray-50 { background-color: #4b5563 !important; /* gray-600 */ }
+        .dark .bg-gray-100 { background-color: #1f2937 !important; /* gray-800 */ }
+        .dark .text-gray-800 { color: #f3f4f6 !important; /* gray-100 */ }
+        .dark .text-gray-700 { color: #d1d5db !important; /* gray-300 */ }
+        .dark .text-gray-600 { color: #9ca3af !important; /* gray-400 */ }
+        .dark .text-sky-600 { color: #38bdf8 !important; /* sky-400 */ }
+        .dark .hover\:text-sky-300:hover { color: #7dd3fc !important; /* sky-300 */ }
+        .dark .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3), 0 4px 6px -2px rgba(0,0,0,0.25); }
+        .dark .card {
+             @apply bg-gray-700 shadow-gray-900/50;
+        }
+        .dark .lang-btn:not(.active) {
+            @apply bg-gray-600 text-gray-200 hover:bg-gray-500;
+        }
+        .dark #project-modal .modal-content {
+            background-color: #374151 !important;
+            color: #f3f4f6 !important;
+        }
+        .dark #project-modal .modal-content .prose,
+        .dark #project-modal .modal-content .prose p,
+        .dark #project-modal .modal-content .prose strong,
+        .dark #project-modal .modal-content .prose h3,
+        .dark #project-modal .modal-content .prose h4,
+        .dark #project-modal .modal-content .prose li {
+             color: #f3f4f6 !important;
+        }
+        .dark #project-modal .modal-content .tech-details-text {
+            color: #d1d5db !important;
+        }
+        .dark .timeline-item .timeline-content {
+            @apply bg-gray-700;
+        }
+        .dark .timeline-item::before { /* Dot */
+            @apply bg-sky-500 border-gray-700;
+        }
+        .dark .timeline-item::after { /* Line */
+            @apply bg-gray-600;
+        }
+        .dark .progress-bar-bg {
+            background-color: #4b5563 !important;
+        }
+        .dark .achievement-toast {
+            @apply bg-gray-700 text-white border-gray-600;
+        }
+
+        .section-title {
+            @apply text-3xl font-bold mb-12 text-center;
+        }
+        .card {
+            @apply bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 ease-in-out;
+        }
+        .card:hover {
+            @apply scale-105 shadow-xl;
+        }
+        .skill-card-item {
+            @apply flex items-center space-x-2 transition-transform duration-200 ease-in-out;
+        }
+        .skill-card-item:hover {
+            @apply translate-x-1;
+        }
+
+        /* Modal Styles */
+        #project-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            padding: 1rem;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            max-width: 42rem;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            display: block;
+        }
+        #modal-body {
+            min-height: 50px;
+        }
+        #project-modal .modal-content .tech-details-heading {
+            color: #1f2937; /* gray-800 */
+            font-weight: 600; /* semibold */
+        }
+        #project-modal .modal-content .tech-details-text {
+            color: #374151; /* gray-700 */
+        }
+        #modal-body.prose h3 { margin-top: 0; }
+
+
+        .lang-btn {
+            @apply px-3 py-1 sm:px-4 sm:py-2 rounded-md text-xs sm:text-sm font-medium transition-colors duration-200 ease-in-out;
+        }
+        .lang-btn.active {
+            @apply bg-sky-500 text-white;
+        }
+        .lang-btn:not(.active) {
+            @apply bg-gray-200 text-gray-700 hover:bg-gray-300;
+        }
+        .theme-btn {
+            @apply p-2 rounded-md hover:bg-sky-600 dark:hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-400 transition-colors duration-200 ease-in-out;
+        }
+        .nav-link {
+             @apply hover:text-sky-300 transition-colors duration-200 ease-in-out text-xs sm:text-base;
+        }
+        .cta-button {
+            @apply bg-white text-sky-600 font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-sky-100 dark:hover:bg-sky-700 dark:text-white dark:bg-sky-600 transition-all duration-300 transform hover:scale-105 text-lg;
+        }
+        .project-details-button {
+            @apply bg-sky-600 text-white px-6 py-2 rounded-lg hover:bg-sky-700 dark:hover:bg-sky-500 transition-colors duration-200 ease-in-out w-full sm:w-auto;
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: currentColor;
+            animation: blink 0.7s infinite;
+            margin-left: 2px;
+            vertical-align: bottom;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            background-color: #e5e7eb; /* gray-200 */
+            border-radius: 9999px; /* rounded-full */
+            height: 0.625rem; /* h-2.5 */
+        }
+        .progress-bar-fill {
+            background-color: #0ea5e9; /* sky-500 */
+            height: 0.625rem; /* h-2.5 */
+            border-radius: 9999px; /* rounded-full */
+            width: 0%; /* Start at 0% */
+            transition: width 1s ease-out !important;
+        }
+        .progress-bar-label { @apply text-xs text-gray-500 dark:text-gray-400; }
+
+        .achievement-toast {
+            @apply fixed bottom-5 right-5 bg-white dark:bg-gray-700 text-gray-800 dark:text-white p-4 rounded-lg shadow-xl border border-gray-200 dark:border-gray-600 z-[150] transition-all duration-500 ease-in-out transform translate-x-full opacity-0;
+        }
+        .achievement-toast.show {
+            @apply translate-x-0 opacity-100;
+        }
+        .achievement-toast-icon { @apply w-8 h-8 mr-3 text-yellow-400; }
+
+        /* Career Timeline CSS Adjustments */
+        .timeline { @apply relative max-w-2xl mx-auto; }
+        .timeline-item {
+            @apply mb-8 flex items-start; /* Use flex for alignment */
+        }
+        .timeline-icon-container { /* Container for dot and icon */
+            @apply flex-shrink-0 w-10 h-10 relative mr-4 flex items-center justify-center;
+        }
+        .timeline-item::before { /* Dot - now a background for the icon or a standalone dot */
+            content: '';
+            @apply absolute inset-0 w-full h-full bg-sky-500 rounded-full border-4 border-white dark:border-gray-700;
+            /* If icon is present, this acts as its background. If no icon, it's the dot. */
+        }
+        .timeline-item i[data-lucide] { /* Icon positioning */
+            @apply relative z-10 text-white; /* Icon on top, text color white */
+             width: 1.25rem; /* Adjust size as needed, e.g., w-5 */
+             height: 1.25rem; /* Adjust size as needed, e.g., h-5 */
+        }
+        .timeline-line-container { /* Container for the vertical line */
+            @apply absolute left-[19px] top-0 bottom-0 w-0.5 flex justify-center; /* Centered with the icon/dot */
+             /* left is approx (icon_container_width / 2) - (line_width / 2) -> (40px/2) - (2px/2) = 19px */
+        }
+         .timeline-line-container::after { /* Line itself */
+            content: '';
+            @apply block w-full bg-gray-300 dark:bg-gray-600;
+        }
+        .timeline-item:last-child .timeline-line-container::after { @apply h-5; } /* Shorten line for last item */
+        .timeline-item:first-child .timeline-line-container::after { @apply mt-5; } /* Start line below icon for first item */
+
+
+        .timeline-content-wrapper {
+            @apply flex-grow; /* Takes remaining space */
+        }
+        .timeline-date { @apply text-sm text-gray-500 dark:text-gray-400 mb-1; }
+        .timeline-title { @apply text-lg font-semibold text-sky-600 dark:text-sky-400 mb-1; }
+        .timeline-content {
+            @apply bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg hover:scale-[1.02];
+        }
+        .timeline-description { @apply text-sm; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-sky-700 text-white p-3 sm:p-4 fixed w-full z-50 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#hero" class="text-lg sm:text-2xl font-bold hover:text-sky-300 transition-colors" data-translate="portfolioTitle">私のポートフォリオ</a>
+            <nav class="flex items-center space-x-1 sm:space-x-3">
+                <a href="#hero" class="nav-link" data-translate="navHome">ホーム</a>
+                <a href="#about" class="nav-link" data-translate="navAbout">自己紹介</a>
+                <a href="#career" class="nav-link" data-translate="navCareer">キャリア</a>
+                <a href="#vision" class="nav-link" data-translate="navVision">ビジョン</a>
+                <a href="#skills" class="nav-link" data-translate="navSkills">スキル</a>
+                <a href="#projects" class="nav-link" data-translate="navProjects">実績</a>
+                <a href="#contact" class="nav-link" data-translate="navContact">連絡先</a>
+                <div class="flex space-x-1 border-l border-sky-600 pl-2 sm:pl-3">
+                    <button id="lang-ja" class="lang-btn active">JP</button>
+                    <button id="lang-en" class="lang-btn">EN</button>
+                </div>
+                <button id="theme-toggle-btn" class="theme-btn">
+                    <i data-lucide="sun" class="block dark:hidden"></i>
+                    <i data-lucide="moon" class="hidden dark:block"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" class="pt-24 pb-16 sm:pt-32 sm:pb-24 bg-gradient-to-br from-sky-500 to-indigo-600 text-white text-center fade-in-section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4" data-translate="heroTitle">革新的なソリューションを創造する</h2>
+            <p class="text-lg sm:text-xl md:text-2xl mb-8 min-h-[1.5em] sm:min-h-[2.5em]">
+                <span id="hero-subtitle-text" data-translate="heroSubtitle">経験豊富なフルスタック開発者・チームリーダー</span>
+                <span class="typing-cursor"></span>
+            </p>
+            <a href="#projects" class="cta-button" data-translate="heroCta">プロジェクトを見る</a>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 sm:py-20 bg-white fade-in-section">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title" data-translate="aboutTitle">自己紹介</h2>
+            <div class="max-w-3xl mx-auto text-center">
+                <img src="https://placehold.co/150x150/E2E8F0/333?text=Your+Photo" alt="[あなたの写真]" class="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto mb-6 shadow-lg border-4 border-sky-200 dark:border-sky-500">
+                <p class="text-lg mb-4" data-translate="aboutIntro">
+                    はじめまして。[sakazaki_tu]です。2013年より日本SES企業にて、主に国民健康保険業務やホームセンター業務のシステム開発・運用保守に携わってまいりました。
+                    詳細設計からテスト、運用保守、さらにはチームリーダーとしてメンバーのマネジメントまで、幅広い経験を積んでおります。
+                    常に新しい技術や知識を積極的に取り入れ、チーム全体のパフォーマンス向上とプロジェクトの成功に貢献することに情熱を燃やしています。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="career" class="py-16 sm:py-20 bg-gray-50 fade-in-section">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title" data-translate="careerTitle">キャリアジャーニー</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon-container">
+                        <div class="timeline-line-container"></div> {/* Vertical line container */}
+                        <i data-lucide="briefcase"></i>
+                    </div>
+                    <div class="timeline-content-wrapper">
+                        <div class="timeline-date" data-translate="career1Date">2013年04月</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title" data-translate="career1Title">日本SES企業 入社</h3>
+                            <p class="timeline-description" data-translate="career1Desc">正社員としてキャリアをスタート。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon-container">
+                        <div class="timeline-line-container"></div>
+                        <i data-lucide="shield-check"></i>
+                    </div>
+                    <div class="timeline-content-wrapper">
+                        <div class="timeline-date" data-translate="career2Date">[プロジェクト1開始時期 例: 2013年0X月]</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title" data-translate="career2Title">次期国民健康保険業務運用システム プロジェクト参画</h3>
+                            <p class="timeline-description" data-translate="career2Desc">詳細設計工程からメンバーとして参画。バッチ機能開発、テスト、障害対応を担当。</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="timeline-item">
+                    <div class="timeline-icon-container">
+                        <div class="timeline-line-container"></div>
+                        <i data-lucide="user-cog"></i>
+                    </div>
+                    <div class="timeline-content-wrapper">
+                        <div class="timeline-date" data-translate="career3Date">[リーダー就任時期 例: 201X年XX月]</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title" data-translate="career3Title">チームリーダー就任 (国保システム)</h3>
+                            <p class="timeline-description" data-translate="career3Desc">運用保守、機能改善、制度改正対応などで開発チームリーダーを担当。環境準備、メンバー指導、進捗管理等を実施。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon-container">
+                        <div class="timeline-line-container"></div>
+                        <i data-lucide="home"></i>
+                    </div>
+                    <div class="timeline-content-wrapper">
+                        <div class="timeline-date" data-translate="career4Date">[プロジェクト2開始時期 例: 20XX年XX月]</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title" data-translate="career4Title">ホームセンター業務運用システム開発 プロジェクト参画</h3>
+                            <p class="timeline-description" data-translate="career4Desc">チームリーダーとして参画。メンバーマネジメントと開発作業を兼務。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vision" class="py-16 sm:py-20 bg-white fade-in-section">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title" data-translate="visionTitle">今後のビジョン</h2>
+            <div class="max-w-3xl mx-auto text-center">
+                 <i data-lucide="trending-up" class="w-16 h-16 mx-auto mb-6 text-sky-500"></i>
+                <p class="text-lg mb-4" data-translate="visionText1">
+                    これまでのシステム開発とチームリーダーとしての経験を基盤に、より大規模で社会貢献性の高いプロジェクトに挑戦していきたいと考えています。
+                    特に、クラウドネイティブなアーキテクチャ設計や、AI・機械学習技術を活用した新しい価値創造に強い関心を持っています。
+                </p>
+                <p class="text-lg" data-translate="visionText2">
+                    技術的な専門性を深めるとともに、プロジェクト全体を俯瞰し、ビジネスゴール達成に貢献できるアーキテクトまたはプロダクトマネージャーとしてのキャリアパスも視野に入れています。
+                    変化の速いIT業界において、常に学び続け、新しい技術や方法論を柔軟に取り入れながら、チームと共に成長していける環境を求めています。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-16 sm:py-20 bg-gray-50 fade-in-section">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title" data-translate="skillsTitle">スキルセット</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-sky-600 flex items-center"><i data-lucide="monitor" class="mr-2"></i><span data-translate="skillsOs">OS</span></h3>
+                    <ul class="space-y-3">
+                        <li class="skill-card-item">Windows 10/11: <span data-translate="skillsExperienceLevel" class="text-gray-500 ml-auto"></span></li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-sky-600 flex items-center"><i data-lucide="code-2" class="mr-2"></i><span data-translate="skillsLanguages">言語</span></h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="skill-card-item">Java:</span>
+                                <span class="progress-bar-label" data-translate="skillsExperience12">12年</span>
+                            </div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" data-skill-level="95"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="skill-card-item">PL/SQL:</span>
+                                <span class="progress-bar-label" data-translate="skillsExperience12">12年</span>
+                            </div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" data-skill-level="90"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="skill-card-item">HTML/CSS:</span>
+                                <span class="progress-bar-label" data-translate="skillsExperience12">12年</span>
+                            </div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" data-skill-level="85"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="skill-card-item">PHP:</span>
+                                <span class="progress-bar-label" data-translate="skillsExperience12">12年</span>
+                            </div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" data-skill-level="80"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="skill-card-item">C#:</span>
+                                <span class="progress-bar-label" data-translate="skillsExperience1">1年</span>
+                            </div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" data-skill-level="40"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="skill-card-item">COBOL:</span>
+                                <span class="progress-bar-label" data-translate="skillsExperience1">1年</span>
+                            </div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" data-skill-level="35"></div></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-sky-600 flex items-center"><i data-lucide="database" class="mr-2"></i><span data-translate="skillsDatabases">データベース</span></h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="skill-card-item">Oracle:</span>
+                                <span class="progress-bar-label" data-translate="skillsExperience12">12年</span>
+                            </div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" data-skill-level="95"></div></div>
+                        </li>
+                        <li>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="skill-card-item">PostgreSQL:</span>
+                                <span class="progress-bar-label" data-translate="skillsExperience3">3年</span>
+                            </div>
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" data-skill-level="65"></div></div>
+                        </li>
+                    </ul>
+                </div>
+                 <div class="card p-6 lg:col-span-3">
+                    <h3 class="text-xl font-semibold mb-4 text-sky-600 flex items-center"><i data-lucide="star" class="mr-2"></i><span data-translate="strengthsTitle">強み・アピールポイント</span></h3>
+                    <ul class="space-y-3">
+                        <li class="skill-card-item" data-translate="strength1"><i data-lucide="users" class="w-5 h-5 mr-2 text-sky-500"></i>大規模プロジェクト（最大700名規模）での開発・運用経験</li>
+                        <li class="skill-card-item" data-translate="strength2"><i data-lucide="user-check" class="w-5 h-5 mr-2 text-sky-500"></i>チームリーダーとしてのマネジメント経験（メンバー指導、進捗管理、環境構築）</li>
+                        <li class="skill-card-item" data-translate="strength3"><i data-lucide="layers" class="w-5 h-5 mr-2 text-sky-500"></i>要件定義から設計、開発、テスト、運用保守までの一貫したシステム開発経験</li>
+                        <li class="skill-card-item" data-translate="strength4"><i data-lucide="brain" class="w-5 h-5 mr-2 text-sky-500"></i>積極的な業務知識の習得と、それに基づく改善提案力</li>
+                        <li class="skill-card-item" data-translate="strength5"><i data-lucide="message-circle" class="w-5 h-5 mr-2 text-sky-500"></i>高いコミュニケーション能力と問題解決能力</li>
+                        <li class="skill-card-item" data-translate="strength6"><i data-lucide="zap" class="w-5 h-5 mr-2 text-sky-500"></i>新しい技術や環境への適応力</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-16 sm:py-20 bg-white fade-in-section">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title" data-translate="projectsTitle">プロジェクト実績</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card">
+                    <img src="https://placehold.co/600x400/3B82F6/FFF?text=National+Health+Insurance+System" alt="[国民健康保険システムイメージ]" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2" data-translate="project1Title">次期国民健康保険業務運用システム</h3>
+                        <p class="text-sky-600 font-medium mb-3" data-translate="project1Role">役割: メンバー ⇒ チームリーダー</p>
+                        <p class="text-gray-600 mb-4 text-sm" data-translate="project1DescShort">国民健康保険業務の次期システム開発。詳細設計から運用保守まで担当し、後にチームリーダーとして機能改善や制度改正対応を牽引。</p>
+                        <button class="project-details-button project-modal-trigger" data-project-id="project1" data-translate="viewDetails">詳細を見る</button>
+                    </div>
+                </div>
+                <div class="card">
+                     <img src="https://placehold.co/600x400/10B981/FFF?text=Home+Center+System" alt="[ホームセンターシステムイメージ]" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2" data-translate="project2Title">ホームセンター業務運用システム開発</h3>
+                        <p class="text-sky-600 font-medium mb-3" data-translate="project2Role">役割: チームリーダー</p>
+                        <p class="text-gray-600 mb-4 text-sm" data-translate="project2DescShort">ホームセンター向け業務システムの開発。チームリーダーとしてメンバー管理と開発作業を兼務し、円滑なプロジェクト遂行に貢献。</p>
+                        <button class="project-details-button project-modal-trigger" data-project-id="project2" data-translate="viewDetails">詳細を見る</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 sm:py-20 bg-gray-800 text-white fade-in-section">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6" data-translate="contactTitle">お問い合わせ</h2>
+            <p class="text-lg mb-6" data-translate="contactIntro">ご興味をお持ちいただけましたら、下記のメールアドレスまたはSNSよりお気軽にご連絡ください。</p>
+            <div class="mb-6">
+                <a href="mailto:your.email@example.com" class="inline-flex items-center justify-center bg-sky-500 hover:bg-sky-600 text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-colors duration-200 ease-in-out text-lg">
+                    <i data-lucide="mail" class="mr-2"></i> <span data-translate="contactEmailValue">u.tomo0730@gmail.com</span>
+                </a>
+            </div>
+            <p class="text-base mb-2" data-translate="contactOr">または</p>
+             <p class="text-lg mb-2">
+                <span data-translate="contactPhoneLabel">電話:</span>
+                <span data-translate="contactPhoneValue">[あなたの電話番号 (任意)]</span>
+            </p>
+            <div class="mt-8 flex justify-center space-x-6">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn">
+                    <i data-lucide="linkedin" class="w-8 h-8"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="GitHub">
+                    <i data-lucide="github" class="w-8 h-8"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors" aria-label="Twitter / X">
+                    <i data-lucide="twitter" class="w-8 h-8"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-400 text-center p-6">
+        <p>&copy; <span id="currentYear"></span> <span data-translate="footerName">[sakazaki_tu]</span>. All Rights Reserved.</p>
+    </footer>
+
+    <div id="project-modal"> <div class="modal-content"> <button id="close-modal-btn" class="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white text-3xl leading-none z-10">&times;</button>
+            <div id="modal-body" class="prose dark:prose-invert pt-8 sm:pt-4"> </div>
+        </div>
+    </div>
+
+    <div id="achievement-toast" class="achievement-toast">
+        <div class="flex items-center">
+            <i id="achievement-icon" data-lucide="award" class="achievement-toast-icon"></i>
+            <div>
+                <p id="achievement-title" class="font-semibold"></p>
+                <p id="achievement-message" class="text-sm"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("LP.html: DOM fully loaded and parsed");
+
+            if (typeof lucide !== 'undefined') {
+                try {
+                    lucide.createIcons();
+                    console.log("LP.html: Lucide icons created on DOMContentLoaded.");
+                } catch (e) {
+                    console.error("LP.html: Error creating Lucide icons:", e);
+                }
+            } else {
+                console.error("LP.html: Lucide library not loaded at DOMContentLoaded.");
+            }
+
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            const htmlElement = document.documentElement;
+
+            if (themeToggleBtn && htmlElement) {
+                const applyTheme = (theme) => {
+                    if (theme === 'dark') htmlElement.classList.add('dark');
+                    else htmlElement.classList.remove('dark');
+                    if (typeof lucide !== 'undefined') { try { lucide.createIcons(); } catch (e) { console.error("LP.html: Error creating Lucide icons on theme change:", e); }}
+                };
+                const storedTheme = localStorage.getItem('theme');
+                const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                const initialTheme = storedTheme || preferredTheme;
+                applyTheme(initialTheme);
+                themeToggleBtn.addEventListener('click', () => {
+                    const newTheme = htmlElement.classList.contains('dark') ? 'light' : 'dark';
+                    applyTheme(newTheme);
+                    localStorage.setItem('theme', newTheme);
+                });
+            }
+
+            const translations = {
+                ja: {
+                    metaDescription: "[sakazaki_tu]のポートフォリオサイト。これまでのプロジェクト実績やスキルを紹介しています。",
+                    portfolioTitle: "私のポートフォリオ",
+                    navHome: "ホーム",navAbout: "自己紹介",navCareer: "キャリア",navVision: "ビジョン",navSkills: "スキル",navProjects: "実績",navContact: "連絡先",
+                    heroTitle: "革新的なソリューションを創造する", heroSubtitle: "経験豊富なフルスタック開発者・チームリーダー", heroCta: "プロジェクトを見る",
+                    aboutTitle: "自己紹介", aboutIntro: "はじめまして。[sakazaki_tu]です。2013年より日本SES企業にて、主に国民健康保険業務やホームセンター業務のシステム開発・運用保守に携わってまいりました。詳細設計からテスト、運用保守、さらにはチームリーダーとしてメンバーのマネジメントまで、幅広い経験を積んでおります。常に新しい技術や知識を積極的に取り入れ、チーム全体のパフォーマンス向上とプロジェクトの成功に貢献することに情熱を燃やしています。",
+                    careerTitle: "キャリアジャーニー", career1Date: "2013年04月", career1Title: "日本SES企業 入社", career1Desc: "正社員としてキャリアをスタート。",
+                    career2Date: "2013年0X月 (例)", career2Title: "次期国民健康保険業務運用システム プロジェクト参画", career2Desc: "詳細設計工程からメンバーとして参画。バッチ機能開発、テスト、障害対応を担当。",
+                    career3Date: "201X年XX月 (例)", career3Title: "チームリーダー就任 (国保システム)", career3Desc: "運用保守、機能改善、制度改正対応などで開発チームリーダーを担当。環境準備、メンバー指導、進捗管理等を実施。",
+                    career4Date: "20XX年XX月 (例)", career4Title: "ホームセンター業務運用システム開発 プロジェクト参画", career4Desc: "チームリーダーとして参画。メンバーマネジメントと開発作業を兼務。",
+                    visionTitle: "今後のビジョン", visionText1: "これまでのシステム開発とチームリーダーとしての経験を基盤に、より大規模で社会貢献性の高いプロジェクトに挑戦していきたいと考えています。特に、クラウドネイティブなアーキテクチャ設計や、AI・機械学習技術を活用した新しい価値創造に強い関心を持っています。", visionText2: "技術的な専門性を深めるとともに、プロジェクト全体を俯瞰し、ビジネスゴール達成に貢献できるアーキテクトまたはプロダクトマネージャーとしてのキャリアパスも視野に入れています。変化の速いIT業界において、常に学び続け、新しい技術や方法論を柔軟に取り入れながら、チームと共に成長していける環境を求めています。",
+                    skillsTitle: "スキルセット", skillsOs: "OS", skillsLanguages: "言語", skillsDatabases: "データベース", skillsExperienceLevel: "業務経験あり", skillsExperience12: "12年", skillsExperience3: "3年", skillsExperience1: "1年",
+                    strengthsTitle: "強み・アピールポイント", strength1: "大規模プロジェクト（最大700名規模）での開発・運用経験", strength2: "チームリーダーとしてのマネジメント経験（メンバー指導、進捗管理、環境構築）", strength3: "要件定義から設計、開発、テスト、運用保守までの一貫したシステム開発経験", strength4: "積極的な業務知識の習得と、それに基づく改善提案力", strength5: "高いコミュニケーション能力と問題解決能力", strength6: "新しい技術や環境への適応力",
+                    projectsTitle: "プロジェクト実績", project1Title: "次期国民健康保険業務運用システム", project1Role: "役割: メンバー ⇒ チームリーダー", project1DescShort: "国民健康保険業務の次期システム開発。詳細設計から運用保守まで担当し、後にチームリーダーとして機能改善や制度改正対応を牽引。",
+                    project1DescFull: `<h3 class="text-2xl font-bold mb-4 tech-details-heading">次期国民健康保険業務運用システム</h3><p class="mb-2"><strong>期間:</strong> [例: 2013年XX月] - [現在または終了年月]</p><p class="mb-2"><strong>役割:</strong> メンバー ⇒ チームリーダー</p><p class="mb-2"><strong>担当業務:</strong> 基本設計、詳細設計、開発、単体テスト、結合テスト、システムテスト、運用保守 (ヘルプデスク)</p><p class="mb-4"><strong>プロジェクト概要:</strong> 国民健康保険業務の次期システム開発プロジェクト。所属チームだけでも最大35名、プロジェクト全体で約700名が参画した大規模案件です。</p><h4 class="text-lg font-semibold mt-4 mb-2 tech-details-heading">実績・取り組み:</h4><ul class="list-disc list-inside mb-4 space-y-1"><li>詳細設計工程から参画し、主にバッチ機能の開発を担当。</li><li>結合テスト、総合テストではバッチ及び画面機能のテスト実施、障害対応。</li><li>高い作業品質と積極的な業務知識習得が評価され、運用保守フェーズにも参画。</li><li>システム稼働後の機能改善、制度改正対応、マイナンバー対応等の新規案件で開発チームリーダーを担当。</li><li>リーダーとして、開発環境準備、メンバーへの技術指導、作業しやすい環境作り、進捗管理、レビュー等を推進。</li></ul><h4 class="text-lg font-semibold mt-4 mb-2 tech-details-heading">使用技術:</h4><p class="tech-details-text"><strong>Java, PL/SQL, Oracle, HTML/CSS, PHP</strong> (その他関連ツール: Apache, Tomcat, Subversionなど。適宜具体的に追記してください)</p>`,
+                    project2Title: "ホームセンター業務運用システム開発", project2Role: "役割: チームリーダー", project2DescShort: "ホームセンター向け業務システムの開発。チームリーダーとしてメンバー管理と開発作業を兼務し、円滑なプロジェクト遂行に貢献。",
+                    project2DescFull: `<h3 class="text-2xl font-bold mb-4 tech-details-heading">ホームセンター業務運用システム開発</h3><p class="mb-2"><strong>期間:</strong> [例: 20XX年XX月] - [終了年月]</p><p class="mb-2"><strong>役割:</strong> チームリーダー</p><p class="mb-2"><strong>担当業務:</strong> 詳細設計、開発、単体テスト、結合テスト、システムテスト</p><p class="mb-4"><strong>プロジェクト概要:</strong> メンバー5名で参画したホームセンターの業務運用システム開発プロジェクト。</p><h4 class="text-lg font-semibold mt-4 mb-2 tech-details-heading">実績・取り組み:</h4><ul class="list-disc list-inside mb-4 space-y-1"><li>チームリーダーとしてメンバーのマネジメント業務（疑問・不安点のヒアリング、解消に向けたアクション）を行いつつ、自身も開発作業に従事。</li><li>メンバーが作業しやすい環境を整備し、プロジェクトの円滑な進行に貢献。</li></ul><h4 class="text-lg font-semibold mt-4 mb-2 tech-details-heading">使用技術:</h4><p class="tech-details-text"><strong>Java, PL/SQL, PostgreSQL, HTML/CSS, JavaScript (jQuery)</strong> (その他関連ツール: Git, Dockerなど。適宜具体的に追記してください)</p>`,
+                    viewDetails: "詳細を見る", contactTitle: "お問い合わせ", contactIntro: "ご興味をお持ちいただけましたら...", contactEmailLabel: "Email:", contactEmailValue: "u.tomo0730@gmail.com", contactOr: "または", contactPhoneLabel: "電話:", contactPhoneValue: "[あなたの電話番号 (任意)]", footerName: "[sakazaki_tu]",
+                    achievementExplorerTitle: "探検家バッジ獲得！", achievementExplorerMessage: "ポートフォリオの隅々までご覧いただきありがとうございます！",
+                    achievementProjectMasterTitle: "プロジェクトマスター獲得！", achievementProjectMasterMessage: "全てのプロジェクト詳細をご覧いただき、素晴らしい探求心です！"
+                },
+                en: { // English translations - ensure these are complete and correct
+                    metaDescription: "Portfolio site of [Your Name]. Introducing past project achievements and skills.",
+                    portfolioTitle: "My Portfolio",
+                    navHome: "Home",navAbout: "About",navCareer: "Career",navVision: "Vision",navSkills: "Skills",navProjects: "Projects",navContact: "Contact",
+                    heroTitle: "Creating Innovative Solutions", heroSubtitle: "Experienced Full-Stack Developer & Team Leader", heroCta: "View Projects",
+                    aboutTitle: "About Me", aboutIntro: "Hello, I'm [Your Name]. Since 2013, I've been with Ibis Japan Co., Ltd., primarily involved in developing and maintaining systems for national health insurance and home improvement center operations. I have extensive experience ranging from detailed design to testing, operational maintenance, and team leadership, including member management. I am passionate about actively incorporating new technologies and knowledge to enhance overall team performance and contribute to project success.",
+                    careerTitle: "Career Journey", career1Date: "April 2013", career1Title: "Joined Ibis Japan Co., Ltd.", career1Desc: "Started career as a full-time employee.",
+                    career2Date: "Oct 2013 (Example)", career2Title: "Joined Next-Gen National Health Insurance System Project", career2Desc: "Participated as a member from the detailed design phase. Handled batch function development, testing, and issue resolution.",
+                    career3Date: "Apr 201X (Example)", career3Title: "Promoted to Team Leader (NHI System)", career3Desc: "Led development team for operational maintenance, functional enhancements, and responses to system reforms. Managed environment setup, member guidance, and progress.",
+                    career4Date: "Jan 20XX (Example)", career4Title: "Joined Home Center Operations System Development Project", career4Desc: "Participated as Team Leader, concurrently managing members and performing development tasks.",
+                    visionTitle: "Future Vision", visionText1: "Building on my experience in system development and team leadership, I aspire to take on larger-scale projects with high social contribution. I am particularly interested in cloud-native architecture design and creating new value using AI/machine learning technologies.", visionText2: "While deepening my technical expertise, I also envision a career path as an architect or product manager who can oversee entire projects and contribute to achieving business goals. In the fast-paced IT industry, I seek an environment where I can continuously learn, flexibly adopt new technologies and methodologies, and grow together with the team.",
+                    skillsTitle: "Skill Set", skillsOs: "OS", skillsLanguages: "Languages", skillsDatabases: "Databases", skillsExperienceLevel: "Business Experience", skillsExperience12: "12 years", skillsExperience3: "3 years", skillsExperience1: "1 year",
+                    strengthsTitle: "Strengths & Highlights", strength1: "Experience in large-scale projects (up to 700 members).", strength2: "Management experience as a team leader (member guidance, progress management, environment setup).", strength3: "Comprehensive system development experience from requirement definition to design, development, testing, and operational maintenance.", strength4: "Proactive acquisition of business knowledge and ability to propose improvements based on it.", strength5: "Strong communication and problem-solving skills.", strength6: "Adaptability to new technologies and environments.",
+                    projectsTitle: "Project Experience", project1Title: "Next-Gen National Health Insurance System", project1Role: "Role: Member ⇒ Team Leader", project1DescShort: "Development of the next-generation system for national health insurance operations. Handled tasks from detailed design to operational maintenance, later leading functional improvements and responses to regulatory changes as a team leader.",
+                    project1DescFull: `<h3 class="text-2xl font-bold mb-4 tech-details-heading">Next-Generation National Health Insurance Operations System</h3><p class="mb-2"><strong>Period:</strong> [e.g., Oct 2013] - [Present or End Date]</p><p class="mb-2"><strong>Role:</strong> Member ⇒ Team Leader</p><p class="mb-2"><strong>Responsibilities:</strong> Basic Design, Detailed Design, Development, Unit Testing, Integration Testing, System Testing, Operation & Maintenance (Help Desk)</p><p class="mb-4"><strong>Project Overview:</strong> A large-scale project to develop the next-generation system for national health insurance operations, involving up to 35 members in my team and nearly 700 members project-wide.</p><h4 class="text-lg font-semibold mt-4 mb-2 tech-details-heading">Achievements & Initiatives:</h4><ul class="list-disc list-inside mb-4 space-y-1"><li>Joined from the detailed design phase, primarily responsible for batch function development.</li><li>Conducted testing and defect resolution for both batch and screen functions during integration and system testing.</li><li>Recognized for high-quality work and proactive learning of business knowledge, leading to continued involvement in the operational maintenance phase.</li><li>Appointed as a development team leader for new initiatives such as post-launch functional enhancements, responses to national health insurance system reforms, and My Number system integration.</li><li>As a leader, prepared development environments, mentored team members on development practices, fostered a productive work environment, managed progress, and conducted reviews.</li></ul><h4 class="text-lg font-semibold mt-4 mb-2 tech-details-heading">Technologies Used:</h4><p class="tech-details-text"><strong>Java, PL/SQL, Oracle, HTML/CSS, PHP</strong> (Other related tools: Apache, Tomcat, Subversion, etc. Please add specifics as appropriate)</p>`,
+                    project2Title: "Home Center Operations System Dev", project2Role: "Role: Team Leader", project2DescShort: "Development of an operational system for a home improvement center. Contributed to smooth project execution by managing team members and participating in development tasks as a team leader.",
+                    project2DescFull: `<h3 class="text-2xl font-bold mb-4 tech-details-heading">Home Improvement Center Operations System Development</h3><p class="mb-2"><strong>Period:</strong> [e.g., Jan 20XX] - [End Date]</p><p class="mb-2"><strong>Role:</strong> Team Leader</p><p class="mb-2"><strong>Responsibilities:</strong> Detailed Design, Development, Unit Testing, Integration Testing, System Testing</p><p class="mb-4"><strong>Project Overview:</strong> Development project for a home improvement center's operational system, with a team of 5 members including myself.</p><h4 class="text-lg font-semibold mt-4 mb-2 tech-details-heading">Achievements & Initiatives:</h4><ul class="list-disc list-inside mb-4 space-y-1"><li>As team leader, managed team members (e.g., addressing questions/concerns, taking action to resolve issues) while also engaging in development work.</li><li>Fostered a productive work environment for team members, contributing to the smooth progress of the project.</li></ul><h4 class="text-lg font-semibold mt-4 mb-2 tech-details-heading">Technologies Used:</h4><p class="tech-details-text"><strong>Java, PL/SQL, PostgreSQL, HTML/CSS, JavaScript (jQuery)</strong> (Other related tools: Git, Docker, etc. Please add specifics as appropriate)</p>`,
+                    viewDetails: "View Details", contactTitle: "Contact Me", contactIntro: "Feel free to reach out...", contactEmailLabel: "Email:", contactEmailValue: "[Your Email Address]", contactOr: "or", contactPhoneLabel: "Phone:", contactPhoneValue: "[Your Phone Number (Optional)]", footerName: "[Your Name]",
+                    achievementExplorerTitle: "Explorer Badge Unlocked!", achievementExplorerMessage: "Thanks for exploring the entire portfolio!",
+                    achievementProjectMasterTitle: "Project Master Unlocked!", achievementProjectMasterMessage: "You've viewed all project details. Great curiosity!"
+                }
+            };
+
+
+            let currentLang = 'ja';
+            const langJaBtn = document.getElementById('lang-ja');
+            const langEnBtn = document.getElementById('lang-en');
+            const translatableElements = document.querySelectorAll('[data-translate]');
+            const metaDescriptionTag = document.querySelector('meta[name="description"]');
+
+            function setLanguage(lang) {
+                console.log(`LP.html: Setting language to: ${lang}`);
+                currentLang = lang;
+                translatableElements.forEach(el => {
+                    const key = el.dataset.translate;
+                    if (translations[lang] && translations[lang][key]) {
+                        el.innerHTML = translations[lang][key];
+                    } else {
+                        // Fallback to Japanese if English key is missing, or keep original if no key at all
+                        if (lang === 'en' && translations.ja[key]) {
+                             console.warn(`LP.html: Translation key "${key}" not found for language "${lang}", falling back to 'ja'. Element:`, el);
+                            el.innerHTML = translations.ja[key];
+                        } else {
+                            console.warn(`LP.html: Translation key "${key}" not found for language "${lang}" and no 'ja' fallback. Element:`, el);
+                        }
+                    }
+                });
+                if (metaDescriptionTag && translations[lang] && translations[lang].metaDescription) {
+                    metaDescriptionTag.setAttribute('content', translations[lang].metaDescription);
+                }
+                if (htmlElement) document.documentElement.lang = lang;
+                if (langJaBtn) langJaBtn.classList.toggle('active', lang === 'ja');
+                if (langEnBtn) langEnBtn.classList.toggle('active', lang === 'en');
+                if (document.getElementById('hero-subtitle-text')) initializeTypingAnimation();
+
+                const projectModalEl = document.getElementById('project-modal');
+                if (projectModalEl && projectModalEl.style.display === 'flex') {
+                    const openProjectId = projectModalEl.dataset.currentProject;
+                    if (openProjectId) openProjectModal(openProjectId);
+                }
+                animateProgressBars();
+                if (typeof lucide !== 'undefined') { try { lucide.createIcons(); } catch (e) { console.error("LP.html: Error creating Lucide icons on setLanguage:", e); }}
+            }
+
+            if (langJaBtn && langEnBtn) {
+                langJaBtn.addEventListener('click', () => setLanguage('ja'));
+                langEnBtn.addEventListener('click', () => setLanguage('en'));
+            }
+
+            const projectModal = document.getElementById('project-modal');
+            const modalBody = document.getElementById('modal-body');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const projectModalTriggers = document.querySelectorAll('.project-modal-trigger');
+            let viewedProjects = new Set(JSON.parse(localStorage.getItem('viewedProjects_portfolio_lp')) || []);
+            const totalProjects = projectModalTriggers.length;
+
+            function openProjectModal(projectId) {
+                console.log(`LP.html: Opening modal for ${projectId}`);
+                if (!projectModal || !modalBody) { console.error("LP.html: Modal or body not found."); return; }
+
+                const projectDataKey = `${projectId}DescFull`;
+                if (translations[currentLang] && translations[currentLang][projectDataKey]) {
+                    modalBody.innerHTML = translations[currentLang][projectDataKey];
+                } else {
+                    modalBody.innerHTML = `<p>Details for ${projectId} not found in ${currentLang}.</p>`;
+                }
+                projectModal.style.display = 'flex';
+                void projectModal.offsetHeight;
+                projectModal.style.opacity = '1';
+                console.log(`LP.html: Modal for ${projectId} display set to flex, opacity to 1.`);
+                projectModal.dataset.currentProject = projectId;
+
+                if (!viewedProjects.has(projectId)) {
+                    viewedProjects.add(projectId);
+                    localStorage.setItem('viewedProjects_portfolio_lp', JSON.stringify(Array.from(viewedProjects)));
+                    if (viewedProjects.size === totalProjects && totalProjects > 0) showAchievement('projectMaster');
+                }
+                if (typeof lucide !== 'undefined') { try { lucide.createIcons(); } catch (e) { console.error("LP.html: Error creating Lucide icons in openProjectModal:", e); }}
+            }
+
+            projectModalTriggers.forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openProjectModal(trigger.dataset.projectId);
+                });
+            });
+
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', () => {
+                    if (projectModal) {
+                        projectModal.style.opacity = '0';
+                        setTimeout(() => {
+                            projectModal.style.display = 'none';
+                            projectModal.dataset.currentProject = '';
+                        }, 300);
+                    }
+                });
+            }
+            if (projectModal) {
+                projectModal.addEventListener('click', (event) => {
+                    if (event.target === projectModal) {
+                        projectModal.style.opacity = '0';
+                        setTimeout(() => {
+                            projectModal.style.display = 'none';
+                            projectModal.dataset.currentProject = '';
+                        }, 300);
+                    }
+                });
+            }
+
+            const currentYearEl = document.getElementById('currentYear');
+            if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
+
+            const sectionsToObserve = document.querySelectorAll('.fade-in-section');
+            const progressBarsNodeList = document.querySelectorAll('.progress-bar-fill');
+
+            function animateProgressBars() {
+                const skillsSection = document.getElementById('skills');
+                if (skillsSection && skillsSection.classList.contains('is-visible')) {
+                    console.log("LP.html: Skills section visible, animating progress bars.");
+                    progressBarsNodeList.forEach((bar) => {
+                        const level = bar.dataset.skillLevel;
+                        if (level) bar.style.width = level + '%';
+                        else console.warn("LP.html: Progress bar missing data-skill-level", bar);
+                    });
+                } else {
+                    console.log("LP.html: Skills section not visible, resetting progress bars.");
+                    progressBarsNodeList.forEach(bar => bar.style.width = '0%');
+                }
+            }
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        if (entry.target.id === 'skills') animateProgressBars();
+                        if (entry.target.id === 'contact' && entry.intersectionRatio >= 0.8) showAchievement('explorer');
+                    }
+                });
+            }, { threshold: [0.1, 0.8] });
+            sectionsToObserve.forEach(section => sectionObserver.observe(section));
+
+            const heroSubtitleTextElement = document.getElementById('hero-subtitle-text');
+            let typingTimeout;
+            function typeChar(text, index) {
+                if (heroSubtitleTextElement && index < text.length) {
+                    heroSubtitleTextElement.textContent = text.substring(0, index + 1);
+                    typingTimeout = setTimeout(() => typeChar(text, index + 1), 80);
+                }
+            }
+            function initializeTypingAnimation() {
+                if (heroSubtitleTextElement) {
+                    clearTimeout(typingTimeout);
+                    heroSubtitleTextElement.textContent = '';
+                    const subtitleKey = heroSubtitleTextElement.dataset.translate;
+                    if (translations[currentLang] && translations[currentLang][subtitleKey]) {
+                        typeChar(translations[currentLang][subtitleKey], 0);
+                    }
+                }
+            }
+
+            const achievementToast = document.getElementById('achievement-toast');
+            const achievementTitleEl = document.getElementById('achievement-title');
+            const achievementMessageEl = document.getElementById('achievement-message');
+            const achievementIconEl = document.getElementById('achievement-icon');
+            let unlockedAchievements = new Set(JSON.parse(localStorage.getItem('unlockedAchievements_portfolio_lp')) || []);
+
+            function showAchievement(type) {
+                if (unlockedAchievements.has(type)) return;
+                let titleKey, messageKey, iconName;
+                if (type === 'explorer') { titleKey = 'achievementExplorerTitle'; messageKey = 'achievementExplorerMessage'; iconName = 'compass'; }
+                else if (type === 'projectMaster') { titleKey = 'achievementProjectMasterTitle'; messageKey = 'achievementProjectMasterMessage'; iconName = 'award'; }
+                else return;
+
+                if (achievementToast && achievementTitleEl && achievementMessageEl && achievementIconEl) {
+                    achievementTitleEl.textContent = translations[currentLang][titleKey] || 'Achievement Unlocked!';
+                    achievementMessageEl.textContent = translations[currentLang][messageKey] || 'You did something great!';
+                    achievementIconEl.setAttribute('data-lucide', iconName);
+                    if (typeof lucide !== 'undefined') { try { lucide.createIcons(); } catch (e) { console.error("LP.html: Error creating Lucide icons in showAchievement:", e); }}
+                    achievementToast.classList.add('show');
+                    unlockedAchievements.add(type);
+                    localStorage.setItem('unlockedAchievements_portfolio_lp', JSON.stringify(Array.from(unlockedAchievements)));
+                    setTimeout(() => achievementToast.classList.remove('show'), 5000);
+                }
+            }
+
+            setLanguage('ja');
+            setTimeout(() => { animateProgressBars(); }, 200);
+        });
+    </script>
+</body>
+</html>
