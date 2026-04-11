@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仮デザイン</title>
+    <!-- ドット絵風フォントと、モダンなゴシックフォントを読み込み -->
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================
+           全体設定・変数
+        ========================================== */
+        :root {
+            --primary-color: #ff4785; /* マッチングアプリらしいピンク */
+            --secondary-color: #00bfff; /* ゲームっぽいシアン */
+            --bg-color: #f8f9fa; /* 清潔感のある薄いグレー背景 */
+            --text-color: #333333; /* 読みやすい濃いグレー */
+            --white: #ffffff;
+            --pixel-font: 'DotGothic16', sans-serif;
+            --main-font: 'Noto Sans JP', sans-serif;
+        }
+
+        body {
+            font-family: var(--main-font);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* ドット風のアクセントフォント */
+        .pixel-text {
+            font-family: var(--pixel-font);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* 共通コンテナ */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==========================================
+           ヒーローセクション（メインビジュアル）
+        ========================================== */
+        .hero {
+            /* 指定されたマップ背景画像を設定 */
+            background: url('./img/map.png') center/cover no-repeat;
+            /* 画像がない場合のフォールバック色 */
+            background-color: #388700; 
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        /* ヒーロー内の文字を見やすくするためのウィンドウ風背景 */
+        .hero-inner {
+            /* 白背景の透明度を上げて（0.9 → 0.75）、背景がより透けるように変更 */
+            background-color: rgba(255, 255, 255, 0.75);
+            /* さらにすりガラス効果（backdrop-filter）を追加すると今風になりますが、今回はレトロ感重視のため除外 */
+            border: 4px double var(--secondary-color);
+            border-radius: 8px;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: #333; /* 背景が透けた分、文字色を少し濃くして視認性を確保 */
+            margin-bottom: 40px;
+            font-weight: bold; /* 視認性向上のため太字に */
+        }
+
+        /* コンバージョンボタン（レトロRPG風の装飾をミックス） */
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-size: 1.5rem;
+            padding: 15px 40px;
+            border-radius: 8px;
+            box-shadow: 0 6px 0 #cc1053, 0 10px 20px rgba(255, 71, 133, 0.4);
+            transition: all 0.1s;
+            position: relative;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 0px 0 #cc1053, 0 4px 10px rgba(255, 71, 133, 0.4);
+        }
+
+        .cta-btn::before {
+            content: "▶";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* ==========================================
+           特徴セクション
+        ========================================== */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        /* RPGのウィンドウ風デザインをモダンにアレンジ */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            /* アクセントとしてドット風の2重線をホバー時に表示 */
+            border: 4px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border: 4px double var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background-color: #f0f8ff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            font-size: 2.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .feature-desc {
+            color: #555;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        /* ==========================================
+           使い方（ステップ）
+        ========================================== */
+        .step-bg {
+            background-color: var(--white);
+        }
+
+        .step-list {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            background: var(--bg-color);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .step-num {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-right: 20px;
+            min-width: 60px;
+        }
+
+        .step-content h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .step-content p {
+            margin: 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* ==========================================
+           お知らせページ（モーダルまたはセクションとして）
+        ========================================== */
+        .news-section {
+            background-color: #f0f4f8;
+        }
+
+        .news-window {
+            background: var(--white);
+            border: 4px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .news-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .news-item {
+            display: flex;
+            flex-direction: column;
+            padding: 15px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        @media (min-width: 600px) {
+            .news-item {
+                flex-direction: row;
+                align-items: baseline;
+            }
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-date {
+            color: #888;
+            font-size: 0.9rem;
+            min-width: 120px;
+            margin-bottom: 5px;
+        }
+
+        .news-title {
+            color: var(--text-color);
+            font-weight: bold;
+        }
+
+        /* ==========================================
+           フッター
+        ========================================== */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a {
+            color: #aaa;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        /* ==========================================
+           レスポンシブ
+        ========================================== */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            .cta-btn {
+                font-size: 1.2rem;
+                padding: 12px 30px;
+            }
+            .section {
+                padding: 50px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- メインビジュアル -->
+    <section class="hero">
+        <div class="container">
+            <!-- 文字を見やすくするウィンドウ枠 -->
+            <div class="hero-inner">
+                <h1 class="hero-title">
+                    <span class="pixel-text" style="color: var(--primary-color);">「仮文章A」</span>仮文章B<br>
+                    仮文章C
+                </h1>
+                <p class="hero-subtitle">
+                    仮文章D、<br>
+                    仮文章E。
+                </p>
+                <button class="cta-btn pixel-text" onclick="alert('仮文章F')">仮文章G</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特徴（4つのコマンド要素をモダンにアレンジ） -->
+    <section class="section container">
+        <h2 class="section-title pixel-text">▼ 仮文章H</h2>
+        <div class="features">
+            <!-- 特徴1: 食事 -->
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">🍖</div>
+                <h3 class="feature-title pixel-text">仮文章I</h3>
+                <p class="feature-desc">仮文章J</p>
+            </div>
+            <!-- 特徴2: 散歩 -->
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">🥾</div>
+                <h3 class="feature-title pixel-text">仮文章K</h3>
+                <p class="feature-desc">仮文章L</p>
+            </div>
+            <!-- 特徴3: 出会い -->
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">💖</div>
+                <h3 class="feature-title pixel-text">仮文章M</h3>
+                <p class="feature-desc">仮文章N</p>
+            </div>
+            <!-- 特徴4: 緊急（安心安全） -->
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">🛡️</div>
+                <h3 class="feature-title pixel-text">仮文章O</h3>
+                <p class="feature-desc">仮文章P</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 使い方ステップ -->
+    <section class="section step-bg">
+        <div class="container">
+            <h2 class="section-title pixel-text">▼ 仮文章Q</h2>
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-num pixel-text">XX</div>
+                    <div class="step-content">
+                        <h3>仮文章R</h3>
+                        <p>仮文章S</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num pixel-text">XX</div>
+                    <div class="step-content">
+                        <h3>仮文章T</h3>
+                        <p>仮文章U</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num pixel-text">XX</div>
+                    <div class="step-content">
+                        <h3>仮文章V</h3>
+                        <p>仮文章W</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- お知らせ（更新可能な掲示板） -->
+    <section class="section news-section">
+        <div class="container">
+            <h2 class="section-title pixel-text">▼ 仮文章X</h2>
+            <div class="news-window">
+                <ul class="news-list" id="news-list">
+                    <!-- ここにJavaScriptでお知らせが挿入されます -->
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">仮文章Y</a>
+                <a href="#">仮文章Z</a>
+                <a href="#">仮文章AA</a>
+                <a href="#">仮文章AB</a>
+            </div>
+            <p class="pixel-text" style="color: #666; font-size: 0.8rem;">&copy; 2026 仮文章AC. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        /* =========================================================
+           【更新作業用エリア】お知らせの更新
+           以下の配列のデータを書き換えるだけで、サイト上のお知らせが更新されます。
+        ========================================================= */
+        const newsData = [
+            { date: "202X.XX.XX", title: "仮文章AD" },
+            { date: "202X.XX.XX", title: "仮文章AE" },
+            { date: "202X.XX.XX", title: "仮文章AF" },
+            { date: "202X.XX.XX", title: "仮文章AG" }
+        ];
+
+        // お知らせリストを描画する処理
+        document.addEventListener('DOMContentLoaded', () => {
+            const list = document.getElementById('news-list');
+            
+            newsData.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'news-item';
+                li.innerHTML = `
+                    <span class="news-date">${item.date}</span>
+                    <span class="news-title">${item.title}</span>
+                `;
+                list.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</html>
