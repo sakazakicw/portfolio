@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵音楽教え隊🎵 | 送迎ゼロの出張型ギターレッスン</title>
+    
+    <!-- Google Fontsの読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF9800',    /* 明るいオレンジ */
+                        secondary: '#FFF3E0',  /* 薄いオレンジ（背景用） */
+                        accent: '#E91E63',     /* ピンク（強調用） */
+                        line: '#06C755',       /* LINE公式グリーン */
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans JP', 'sans-serif'],
+                        rounded: ['M PLUS Rounded 1c', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* カスタムのクリックエフェクトなど、Tailwindで補いきれない微調整 */
+        .btn-active:active {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+        /* スムーススクロール */
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+<div class="w-full overflow-hidden">
+
+    <!-- 1. ファーストビュー (FV) -->
+    <section class="bg-secondary py-10 md:py-16 relative">
+        <!-- コンテンツ幅を最大1024pxに制限し、中央寄せにする -->
+        <div class="max-w-5xl mx-auto px-5">
+            <!-- PC時は2カラム、スマホ時は1カラムのグリッドレイアウト -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                
+                <!-- テキストエリア（スマホ：1番目、PC：左上） -->
+                <div class="order-1 text-center md:text-left">
+                    <span class="inline-block bg-gray-800 text-white px-4 py-1.5 rounded-full text-sm font-bold mb-4 shadow-sm">
+                        中野区・杉並区・世田谷区 限定
+                    </span>
+                    <h1 class="font-rounded text-primary font-black text-[26px] md:text-[34px] leading-snug mb-4">
+                        送迎ゼロで、我が子が<br class="hidden md:block">音楽に夢中になる！
+                        <span class="block text-gray-800 text-lg md:text-xl font-bold mt-3">
+                            現役バンドマンが教える、<br>出張型ギターレッスン「🎵音楽教え隊🎵」
+                        </span>
+                    </h1>
+                </div>
+
+                <!-- 画像エリア（スマホ：2番目、PC：右側全体を縦に占有） -->
+                <div class="order-2 md:row-span-2">
+                    <img src="https://placehold.co/800x600/FFCC80/ffffff?text=Kids+Playing+Guitar" alt="ギターを弾く子供のイメージ" class="w-full rounded-xl shadow-lg border-4 border-white object-cover aspect-video md:aspect-[4/3]">
+                </div>
+
+                <!-- オファー＆ボタンエリア（スマホ：3番目、PC：左下） -->
+                <div class="order-3">
+                    <div class="bg-white border-4 border-accent rounded-xl p-5 mb-6 text-center shadow-sm">
+                        <p class="text-accent font-bold text-base md:text-lg mb-1">＼ 100名様限定・特割キャンペーン ／</p>
+                        <p class="text-xl md:text-2xl font-bold text-gray-800">
+                            初回体験30分 ➔ <span class="text-[32px] md:text-[40px] text-accent">1,000</span>円
+                        </p>
+                        <p class="text-sm md:text-base font-bold mt-2">さらに今なら【入会金0円】！</p>
+                    </div>
+
+                    <a href="#line" class="btn-active block bg-line text-white text-center py-4 md:py-5 rounded-full text-lg md:text-xl font-bold shadow-[0_5px_10px_rgba(6,199,85,0.3)] transition-all">
+                        💬 まずはLINEで優先案内を受け取る（無料）
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 悩みへの共感 -->
+    <section class="py-12 md:py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-5">
+            <h2 class="font-rounded text-center text-2xl md:text-3xl text-primary font-bold mb-8 pb-3 border-b-4 border-dashed border-primary inline-block w-full">
+                こんなお悩み、<br class="md:hidden">ありませんか？
+            </h2>
+            
+            <!-- PC時は2列のグリッドにして見やすく -->
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                <li class="bg-secondary p-5 pl-14 rounded-xl relative font-bold text-[15px] md:text-[16px] leading-relaxed shadow-sm">
+                    <span class="absolute left-5 top-1/2 -translate-y-1/2 text-primary text-3xl font-black">✓</span>
+                    子供に習い事をさせたいけど、毎回の「送迎」が負担…
+                </li>
+                <li class="bg-secondary p-5 pl-14 rounded-xl relative font-bold text-[15px] md:text-[16px] leading-relaxed shadow-sm">
+                    <span class="absolute left-5 top-1/2 -translate-y-1/2 text-primary text-3xl font-black">✓</span>
+                    せっかく始めても、先生と合わずにすぐ辞めてしまわないか心配…
+                </li>
+                <li class="bg-secondary p-5 pl-14 rounded-xl relative font-bold text-[15px] md:text-[16px] leading-relaxed shadow-sm">
+                    <span class="absolute left-5 top-1/2 -translate-y-1/2 text-primary text-3xl font-black">✓</span>
+                    ただ技術を詰め込むより、「心から夢中になれるもの」を見つけてほしい
+                </li>
+                <li class="bg-secondary p-5 pl-14 rounded-xl relative font-bold text-[15px] md:text-[16px] leading-relaxed shadow-sm">
+                    <span class="absolute left-5 top-1/2 -translate-y-1/2 text-primary text-3xl font-black">✓</span>
+                    初期費用（楽器代など）が高くて踏み切れない…
+                </li>
+            </ul>
+            <p class="text-center font-bold text-accent text-[18px] md:text-[22px] mt-10">
+                そのお悩み、「音楽教え隊」が<br class="md:hidden">すべて解決します！
+            </p>
+        </div>
+    </section>
+
+    <!-- 3. 解決策と強み (USP) -->
+    <section class="py-12 md:py-20 bg-secondary">
+        <div class="max-w-5xl mx-auto px-5">
+            <h2 class="font-rounded text-center text-2xl md:text-3xl text-primary font-bold mb-10 pb-3 border-b-4 border-dashed border-primary inline-block w-full">
+                音楽教え隊が選ばれる<br class="md:hidden">3つの理由
+            </h2>
+            
+            <!-- PC時は3列のカードレイアウト -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm h-full flex flex-col">
+                    <img src="https://placehold.co/600x360/e0e0e0/666666?text=Bandman+Teacher" alt="バンドマン講師" class="w-full rounded-lg mb-5 object-cover aspect-video">
+                    <h3 class="text-primary text-[18px] md:text-[20px] font-bold text-center mb-4 leading-snug">
+                        1. 先生は全員「ステージを知る」元/現役バンドマン！
+                    </h3>
+                    <p class="text-[15px] leading-relaxed text-gray-700 flex-grow">
+                        ただ楽譜通りに弾くのではなく、大勢の前で演奏してきた経験者だからこそ伝えられる「音楽の本当の楽しさ」があります。教科書通りではない、心躍るような生きたレッスンをお届けします。
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm h-full flex flex-col">
+                    <img src="https://placehold.co/600x360/e0e0e0/666666?text=Home+Lesson" alt="自宅出張レッスン" class="w-full rounded-lg mb-5 object-cover aspect-video">
+                    <h3 class="text-primary text-[18px] md:text-[20px] font-bold text-center mb-4 leading-snug">
+                        2. 完全出張スタイルで<br>「送迎の負担ゼロ」
+                    </h3>
+                    <p class="text-[15px] leading-relaxed text-gray-700 flex-grow">
+                        ご自宅やご近所のスタジオまで講師が伺います。忙しい親御さんの時間を奪わず、雨の日も安心してレッスンを受けられます。
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm h-full flex flex-col">
+                    <img src="https://placehold.co/600x360/e0e0e0/666666?text=Kids+Guitar" alt="子供用ギター貸出" class="w-full rounded-lg mb-5 object-cover aspect-video">
+                    <h3 class="text-primary text-[18px] md:text-[20px] font-bold text-center mb-4 leading-snug">
+                        3. 子供用ギター「無料貸出」で手ぶらスタート！
+                    </h3>
+                    <p class="text-[15px] leading-relaxed text-gray-700 flex-grow">
+                        「続くかわからないのに高い楽器は買えない…」という方も安心。まずは無料でギターに触れるところから始められますので、初期費用を大幅に抑えられます。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 料金・キャンペーン -->
+    <section class="py-12 md:py-20 bg-white">
+        <div class="max-w-3xl mx-auto px-5">
+            <h2 class="font-rounded text-center text-2xl md:text-3xl text-primary font-bold mb-6 pb-3 border-b-4 border-dashed border-primary inline-block w-full">
+                まずは「先生との相性」を<br class="md:hidden">確かめてください！
+            </h2>
+            <p class="text-center text-[15px] md:text-[16px] mb-10 leading-relaxed text-gray-700">
+                継続するために一番大切なのは「先生との相性」です。だからこそ、特別な体験コースをご用意しました。
+            </p>
+            
+            <div class="border-4 border-primary rounded-2xl p-8 md:p-12 text-center shadow-sm relative mt-8">
+                <!-- 上部のリボン飾り -->
+                <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-primary text-white font-bold py-2 px-8 rounded-full text-sm md:text-base whitespace-nowrap shadow-md">
+                    100名様限定
+                </div>
+                <h3 class="text-xl md:text-2xl font-bold mb-6 mt-4">たっぷり30分体験コース</h3>
+                <p class="text-xl md:text-2xl font-bold border-b-2 border-gray-100 pb-6 mb-6">
+                    通常価格 ➔ <span class="text-4xl md:text-5xl text-accent mx-2">1,000</span>円
+                </p>
+                <p class="text-primary font-bold text-lg md:text-xl leading-snug">
+                    ★さらに！体験後、本入会で<br>【入会金0円】キャンペーン実施中！
+                </p>
+                <p class="text-[13px] text-gray-500 mt-4">※3ヶ月以上継続の方が対象となります。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CTA (LINE誘導) -->
+    <section id="line" class="py-16 md:py-20 bg-[#FFF9C4] text-center border-y-8 border-primary">
+        <div class="max-w-3xl mx-auto px-5">
+            <p class="text-accent font-bold text-xl md:text-2xl mb-4">【重要】現在、プレオープン準備中です</p>
+            <div class="bg-white p-6 md:p-8 rounded-2xl text-[15px] md:text-[16px] text-left mb-8 shadow-sm leading-relaxed text-gray-700 border border-gray-100">
+                現在、最高品質のレッスンをお届けするため、講師陣の最終調整を行っております。<br><br>
+                正式リリース前に、公式LINEにご登録いただいた方から<strong class="text-accent bg-yellow-100 px-1">【優先的に】</strong>体験レッスンのご案内と、100名様限定の特割キャンペーン枠を確保させていただきます。
+            </div>
+            
+            <!-- LINEのパルスアニメーションで注目を集める -->
+            <div class="relative max-w-lg mx-auto">
+                <div class="absolute -inset-1 bg-line rounded-full blur opacity-30 animate-pulse"></div>
+                <a href="#" class="btn-active relative block bg-line text-white text-center py-5 md:py-6 rounded-full text-xl md:text-2xl font-bold shadow-[0_5px_10px_rgba(6,199,85,0.4)] transition-all">
+                    💬 今すぐLINEに登録して<br class="md:hidden">優先枠をキープする
+                </a>
+            </div>
+            
+            <p class="text-[13px] text-gray-600 mt-5 text-center md:text-left max-w-lg mx-auto">
+                ※登録後、ご案内まで少々お待ちください。ブロックせずにお待ちいただけると幸いです。
+            </p>
+        </div>
+    </section>
+
+    <!-- 6. よくある質問 -->
+    <section class="py-12 md:py-20 bg-white">
+        <div class="max-w-3xl mx-auto px-5">
+            <h2 class="font-rounded text-center text-2xl md:text-3xl text-primary font-bold mb-10 pb-3 border-b-4 border-dashed border-primary inline-block w-full">
+                よくある質問
+            </h2>
+            
+            <div class="space-y-6">
+                <div>
+                    <div class="bg-secondary p-5 pl-14 rounded-t-xl font-bold relative text-[15px] md:text-[16px]">
+                        <span class="absolute left-5 top-5 text-primary text-2xl leading-none">Q.</span>
+                        自宅に呼ぶのが少し不安なのですが…
+                    </div>
+                    <div class="border-2 border-secondary border-t-0 p-5 pl-14 rounded-b-xl text-[14px] md:text-[15px] relative leading-relaxed text-gray-700">
+                        <span class="absolute left-5 top-5 text-accent text-2xl font-bold leading-none">A.</span>
+                        ご自宅への出張はもちろん、ご近所の音楽スタジオでのレッスンも可能です。ご家庭の事情に合わせて柔軟にお選びいただけます。
+                    </div>
+                </div>
+
+                <div>
+                    <div class="bg-secondary p-5 pl-14 rounded-t-xl font-bold relative text-[15px] md:text-[16px]">
+                        <span class="absolute left-5 top-5 text-primary text-2xl leading-none">Q.</span>
+                        全くの初心者でも大丈夫ですか？
+                    </div>
+                    <div class="border-2 border-secondary border-t-0 p-5 pl-14 rounded-b-xl text-[14px] md:text-[15px] relative leading-relaxed text-gray-700">
+                        <span class="absolute left-5 top-5 text-accent text-2xl font-bold leading-none">A.</span>
+                        もちろんです！ギターの持ち方や鳴らし方から、音楽の楽しさを肌で感じられるよう、お子様のペースに合わせて丁寧にレッスンします。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="bg-gray-800 text-white text-center py-8 text-sm">
+        <p>&copy; 2026 🎵音楽教え隊🎵 All Rights Reserved.</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
