@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>価格交渉代行 ALL ONE | あなたの大切な資産を適正価格で最大限に</title>
     
+    <!-- ファビコン（タブアイコン）の設定 -->
+    <link rel="icon" href="img/IMG_2772.jpg" type="image/jpeg">
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: 格調高い明朝体と洗練されたゴシック -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+JP:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: 格調高い明朝体と洗練されたゴシック、英語ロゴ用フォント -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Serif+JP:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -49,12 +52,17 @@
     </script>
     
     <style>
-        /* 白とシャンパンゴールドを基調とした、透明感と気品のある大理石風グラデーション背景 */
         .bg-luxury-light {
             background: linear-gradient(180deg, #FFFFFF 0%, #FDFBF7 40%, #F5EADA 100%);
         }
         
-        /* 繊細なシャンパンゴールドのフレーム */
+        .bg-hero {
+            background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.25) 70%, rgba(255, 255, 255, 0.45) 100%), url('img/IMG_sakusei1.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
         .gold-frame {
             border: 1px solid rgba(197, 168, 128, 0.4);
         }
@@ -65,18 +73,17 @@
         }
         
         .gold-gradient-text {
-            background: linear-gradient(135deg, #947449 0%, #C5A880 50%, #947449 100%);
+            background: linear-gradient(135deg, #6B4E27 0%, #A9895F 50%, #6B4E27 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.95)) drop-shadow(0 1px 2px rgba(255, 255, 255, 0.8));
         }
 
-        /* 日本語が不自然な位置で1文字ちぎれるのを防ぐ */
         .prevent-split {
             word-break: keep-all;
             overflow-wrap: break-word;
         }
 
-        /* LINEグリーンの高級感あるパルスアニメーション */
         @keyframes pulse-line {
             0% { box-shadow: 0 0 0 0 rgba(6, 199, 85, 0.5); }
             70% { box-shadow: 0 0 0 12px rgba(6, 199, 85, 0); }
@@ -87,165 +94,192 @@
         }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-900 antialiased min-h-screen font-sans">
+<body class="bg-slate-100 text-slate-900 antialiased min-h-screen font-sans pb-28 md:pb-8">
 
-<!-- メインコンテナ：PCでは最大幅5xlで両サイドに優雅なマージン、モバイルは全幅 -->
-<!-- 追従フッターと被らないよう、スマホ表示時のみ下部に十分な余白 (pb-24) を設けます -->
-<div class="w-full max-w-5xl mx-auto bg-white shadow-2xl overflow-hidden min-h-screen flex flex-col justify-between pb-24 md:pb-0">
+<div class="w-full max-w-5xl mx-auto bg-white shadow-2xl overflow-hidden min-h-screen flex flex-col justify-between">
 
-    <!-- 1. ファーストビュー (FV) -->
-    <header class="relative px-6 md:px-16 pt-12 pb-16 bg-luxury-light border-b gold-frame">
-        
-        <div class="text-center mb-4">
-            <span class="inline-block gold-badge text-gold-600 px-5 py-1 text-xs tracking-widest font-serif font-bold rounded">
-                東京都・神奈川県エリア限定
-            </span>
-        </div>
+    <header class="relative bg-white border-b gold-frame">
+        <div class="bg-hero px-6 md:px-16 pt-12 pb-10 text-center border-b gold-frame">
+            <div class="text-center mb-5">
+                <span class="inline-block gold-badge text-gold-600 px-5 py-1 text-xs tracking-widest font-serif font-bold rounded">
+                    東京都・神奈川県エリア限定
+                </span>
+            </div>
 
-        <!-- キャッチコピー -->
-        <div class="text-center max-w-3xl mx-auto mb-10">
-            <p class="text-gold-500 font-bold text-sm md:text-base tracking-widest mb-3">信頼と実績の価格交渉代行 【時計・宝飾品専門】</p>
-            <h1 class="font-serif text-2xl md:text-4.5xl leading-snug md:leading-normal font-black tracking-wide text-slate-900">
+            <div class="mb-5">
+                <p class="text-gold-600 font-bold text-xs md:text-sm tracking-widest mb-1">【時計・宝飾品専門】価格交渉代行の</p>
+                <h2 class="font-en text-4xl md:text-6xl font-black tracking-widest text-slate-900 mt-2 select-none" style="text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);">
+                    ALL ONE
+                </h2>
+            </div>
+
+            <h1 class="font-serif-strong text-2xl md:text-4xl leading-snug md:leading-normal tracking-wide text-slate-900 mt-4">
                 あなたの大切な資産を<br>
-                <span class="gold-gradient-text text-3xl md:text-5.5xl block my-2 md:my-3">適正価格で最大限に。</span>
+                <span class="gold-gradient-text text-3.5xl md:text-5.5xl block my-2 md:my-3 font-extrabold">適正価格で最大限に。</span>
             </h1>
         </div>
 
-        <!-- メイングリッド (左: 3つの特徴 / 右: 高級ロゴ画像) -->
-        <!-- responsive order: スマホ表示時はロゴ(order-1)が上になり、3つの特徴(order-2)が下になります -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center mt-12">
+        <div class="px-6 md:px-16 pb-16 bg-luxury-light">
             
-            <!-- 左カラム：インスタクリエイティブを踏襲した3つの強み -->
-            <div class="md:col-span-7 space-y-5 order-2 md:order-1">
-                
-                <div class="flex items-start space-x-4 bg-white p-5 rounded-xl shadow-sm border border-gold-100">
-                    <div class="bg-gold-100 text-gold-600 p-2.5 rounded-lg flex-shrink-0 font-bold">
-                        🤝
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-12">
+                <div class="md:col-span-7 space-y-5 order-2 md:order-1">
+                    
+                    <div class="flex items-start space-x-4 bg-white p-5 rounded-xl shadow-sm border border-gold-100">
+                        <div class="bg-gold-100 text-gold-600 p-2.5 rounded-lg flex-shrink-0 font-bold">
+                            🤝
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-slate-900 text-sm md:text-base mb-1">業界経験豊富なプロが対応</h4>
+                            <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+                                豊富な知識と経験をもとに、あなたの大切な資産を最適な価格で交渉します。安買い業者の常套手段や駆け引きは一切通用しません。
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <h4 class="font-serif font-bold text-slate-900 text-sm md:text-base mb-1">業界経験豊富なプロが対応</h4>
-                        <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-                            豊富な知識と経験をもとに、あなたの大切な資産を最適な価格で交渉します。安買い業者の常套手段や駆け引きは一切通用しません。
-                        </p>
+
+                    <div class="flex items-start space-x-4 bg-white p-5 rounded-xl shadow-sm border border-gold-100">
+                        <div class="bg-gold-100 text-gold-600 p-2.5 rounded-lg flex-shrink-0 font-bold">
+                            📈
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-slate-900 text-sm md:text-base mb-1">適正価格での交渉力に自信</h4>
+                            <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+                                市場相場を徹底分析し、適正価格での交渉を実現。納得のいく取引をお約束します。
+                            </p>
+                        </div>
                     </div>
+
+                    <div class="flex items-start space-x-4 bg-white p-5 rounded-xl shadow-sm border border-gold-100">
+                        <div class="bg-gold-100 text-gold-600 p-2.5 rounded-lg flex-shrink-0 font-bold">
+                            🛡️
+                        </div>
+                        <div>
+                            <h4 class="font-serif font-bold text-slate-900 text-sm md:text-base mb-1">秘密厳守・安心のサポート体制</h4>
+                            <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+                                プライバシーの守秘はもちろん、取引完了まで安心のサポートをご提供します。
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="flex items-start space-x-4 bg-white p-5 rounded-xl shadow-sm border border-gold-100">
-                    <div class="bg-gold-100 text-gold-600 p-2.5 rounded-lg flex-shrink-0 font-bold">
-                        📈
-                    </div>
-                    <div>
-                        <h4 class="font-serif font-bold text-slate-900 text-sm md:text-base mb-1">適正価格での交渉力に自信</h4>
-                        <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-                            市場相場を徹底分析し、適正価格での交渉を実現。納得のいく取引をお約束します。
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex items-start space-x-4 bg-white p-5 rounded-xl shadow-sm border border-gold-100">
-                    <div class="bg-gold-100 text-gold-600 p-2.5 rounded-lg flex-shrink-0 font-bold">
-                        🛡️
-                    </div>
-                    <div>
-                        <h4 class="font-serif font-bold text-slate-900 text-sm md:text-base mb-1">秘密厳守・安心のサポート体制</h4>
-                        <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-                            プライバシーの守秘はもちろん、取引完了まで安心のサポートをご提供します。
-                        </p>
-                    </div>
+                <div class="md:col-span-5 w-full h-72 md:h-96 bg-black rounded-2xl overflow-hidden border-2 border-gold-200 shadow-xl flex items-center justify-center order-1 md:order-2">
+                    <img src="img/IMG_2772.jpg" onerror="this.src='https://placehold.co/600x600/000000/c5a880?text=ALL+ONE'" alt="ALL ONE ロゴ" class="w-full h-full object-contain">
                 </div>
 
             </div>
 
-            <!-- 右カラム：ロゴ画像 (IMG_2772.jpg) -->
-            <div class="md:col-span-5 w-full h-72 md:h-96 bg-black rounded-2xl overflow-hidden border-2 border-gold-200 shadow-xl flex items-center justify-center order-1 md:order-2">
-                <img src="img/IMG_2772.jpg" onerror="this.src='https://placehold.co/600x600/000000/c5a880?text=ALL+ONE'" alt="ALL ONE ロゴ" class="w-full h-full object-contain">
+            <div class="flex flex-wrap justify-center gap-6 md:gap-12 text-xs font-medium text-gray-600 border-t border-gold-200 pt-8 mt-10">
+                <span class="flex items-center space-x-2"><span class="text-gold-500">🔍</span> <span>無料査定・相談</span></span>
+                <span class="flex items-center space-x-2"><span class="text-gold-500">🔒</span> <span>完全秘密厳守</span></span>
+                <span class="flex items-center space-x-2"><span class="text-gold-500">🗾</span> <span>対応エリア：東京・神奈川</span></span>
             </div>
 
-        </div>
+            <div class="max-w-md mx-auto mt-10">
+                <a href="https://lin.ee/XJuSPN2" target="_blank" rel="noopener noreferrer" class="block w-full bg-line text-white text-center py-4 rounded-xl text-base md:text-lg font-bold btn-pulse transition duration-300 hover:bg-green-600 shadow-lg">
+                    💬 まずはLINEでお気軽にご相談ください
+                </a>
+                <p class="text-[10px] text-gray-500 text-center mt-2">※クリックするとLINEアプリに遷移します</p>
+            </div>
 
-        <!-- 下部バッジ -->
-        <div class="flex flex-wrap justify-center gap-6 md:gap-12 text-xs font-medium text-gray-600 border-t border-gold-200 pt-8 mt-10">
-            <span class="flex items-center space-x-2"><span class="text-gold-500">🔍</span> <span>無料査定・相談</span></span>
-            <span class="flex items-center space-x-2"><span class="text-gold-500">🔒</span> <span>完全秘密厳守</span></span>
-            <span class="flex items-center space-x-2"><span class="text-gold-500">🗾</span> <span>対応エリア：東京・神奈川</span></span>
-        </div>
-
-        <!-- LINE登録用メインボタン -->
-        <div class="max-w-md mx-auto mt-10">
-            <a href="https://lin.ee/XJuSPN2" target="_blank" rel="noopener noreferrer" class="block w-full bg-line text-white text-center py-4 rounded-xl text-base md:text-lg font-bold btn-pulse transition duration-300 hover:bg-green-600 shadow-lg">
-                💬 まずはLINEでお気軽にご相談ください
-            </a>
-            <p class="text-[10px] text-gray-500 text-center mt-2">※クリックするとLINEアプリに安全に遷移します</p>
         </div>
 
     </header>
 
-    <!-- 2. コンセプト：インスタメッセージの美学 -->
     <section class="px-6 md:px-16 py-16 bg-gold-50 border-b border-gold-100">
-        <div class="max-w-3xl mx-auto text-center border-2 border-gold-200 p-8 md:p-12 rounded-2xl bg-white shadow-sm">
-            <span class="font-serif text-gold-500 text-xs tracking-widest font-bold block mb-4">ALL ONE CONCEPT</span>
-            <h3 class="font-serif text-slate-900 font-bold text-lg md:text-xl mb-6">大切なお品物を手放す際、<br>売却先によって査定額に大きな差が生じることがあります。</h3>
-            
-            <div class="text-xs md:text-sm text-gray-600 leading-relaxed space-y-4 text-left max-w-xl mx-auto prevent-split">
-                <p>適正な価値が十分に評価されないまま、本来得られるはずの価格を逃してしまうケースも少なくありません。</p>
-                <p>しかし、時計や宝飾品の市場価値を正確に把握し、最適な売却先を見極めるには、専門的な知識と多くの時間を要します。</p>
-                <p class="text-slate-900 font-bold border-l-4 border-gold-400 pl-3">ALL ONEでは、お客様に代わり複数の専門業者と交渉を行い、お品物の価値を最大限に引き出すお手伝いをいたします。</p>
+        <div class="max-w-4xl mx-auto border-2 border-gold-200 p-6 md:p-10 rounded-2xl bg-white shadow-sm">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                
+                <div class="md:col-span-7 text-center md:text-left">
+                    <span class="font-serif text-gold-500 text-xs tracking-widest font-bold block mb-4">ALL ONE CONCEPT</span>
+                    <h3 class="font-serif text-slate-900 font-bold text-lg md:text-xl mb-6 leading-relaxed">
+                        大切なお品物を手放す際、<br class="hidden md:block">売却先によって査定額に大きな差が生じることがあります。
+                    </h3>
+                    
+                    <div class="text-xs md:text-sm text-gray-600 leading-relaxed space-y-4 prevent-split">
+                        <p>適正な価値が十分に評価されないまま、本来得られるはずの価格を逃してしまうケースも少なくありません。</p>
+                        <p>しかし、時計や宝飾品の市場価値を正確に把握し、最適な売却先を見極めるには、専門的な知識と多くの時間を要します。</p>
+                        <p class="text-slate-900 font-bold border-l-4 border-gold-400 pl-3">
+                            ALL ONEでは、お客様に代わり複数の専門業者と交渉を行い、お品物の価値を最大限に引き出すお手伝いをいたします。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-5 w-full h-64 md:h-80 bg-slate-50 rounded-xl overflow-hidden border border-gold-100 shadow-md">
+                    <img src="img/IMG_sakusei2.png" onerror="this.src='https://placehold.co/600x450/faf6f0/c5a880?text=ALL+ONE+Concept'" alt="プロによる信頼の査定・交渉" class="w-full h-full object-cover">
+                </div>
+                
             </div>
         </div>
     </section>
 
-    <!-- 3. 危機感の醸成（1社だけで売るリスク） -->
     <section class="px-6 md:px-16 py-16 bg-white border-b border-slate-100">
         <h2 class="font-serif text-xl md:text-2xl text-center text-slate-900 mb-10 tracking-wide font-bold">
             近くの店舗、たった1社だけに査定・売却させていませんか？
         </h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs md:text-sm">
-            <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
-                <p class="font-bold text-red-600 mb-2">⚠️ 情報弱者が刈り取られる時代</p>
-                <p class="text-gray-600 leading-relaxed">今、知識のない個人から不当に安く買い叩く業者が大量に出現しています。相見積もりを取らないことは、買取業者に数万〜数十万円の利益を「タダであげている」のと同じです。</p>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center max-w-4xl mx-auto">
+            
+            <div class="md:col-span-5 w-full h-72 md:h-96 bg-slate-100 rounded-xl overflow-hidden border border-red-100 shadow-lg order-1">
+                <img src="img/IMG_sakusei3.png" onerror="this.src='https://placehold.co/500x650/1e293b/ef4444?text=Loss+and+Regret'" alt="1社査定で買い叩かれて悩む男性" class="w-full h-full object-cover">
             </div>
 
-            <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
-                <p class="font-bold text-red-600 mb-2">⚠️ 出張買取の甘い罠</p>
-                <p class="text-gray-600 leading-relaxed">「家まで来てくれて便利だから」と出張買取を呼び、本来売る気のなかった他のブランド品や貴金属まで強引に安値で案内されていませんか？</p>
+            <div class="md:col-span-7 space-y-4 order-2 text-xs md:text-sm">
+                
+                <div class="bg-red-50/40 p-5 rounded-xl border border-red-100">
+                    <p class="font-bold text-red-600 mb-2 flex items-center">
+                        <span class="mr-2 text-base">⚠️</span> 情報弱者が刈り取られる時代
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">今、知識のない個人から不当に安く買い叩く業者が大量に出現しています。相見積もりを取らないことは、買取業者に数万〜数十万円の利益を「タダであげている」と同じです。</p>
+                </div>
+
+                <div class="bg-red-50/40 p-5 rounded-xl border border-red-100">
+                    <p class="font-bold text-red-600 mb-2 flex items-center">
+                        <span class="mr-2 text-base">⚠️</span> 出張買取の甘い罠
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">「家まで来てくれて便利だから」と出張買取を呼び、本来売る気のなかった他のブランド品や貴金属まで強引に安値で案内されていませんか？</p>
+                </div>
+
+                <div class="bg-red-50/40 p-5 rounded-xl border border-red-100">
+                    <p class="font-bold text-red-600 mb-2 flex items-center">
+                        <span class="mr-2 text-base">⚠️</span> 時間の妥協は「大損」の始まり
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">「本当は複数のお店で相見積もりしたいけど、時間がないし面倒…」と妥協した瞬間に、業者の思うツボです。</p>
+                </div>
+
             </div>
 
-            <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
-                <p class="font-bold text-red-600 mb-2">⚠️ 時間の妥協は「大損」の始まり</p>
-                <p class="text-gray-600 leading-relaxed">「本当は複数のお店で相見積もりしたいけど、時間がないし面倒…」と妥協した瞬間に、業者の思うツボです。</p>
-            </div>
         </div>
 
-        <p class="text-center font-bold text-sm md:text-base text-red-600 mt-10 font-serif leading-relaxed">
+        <p class="text-center font-bold text-sm md:text-base text-red-600 mt-12 font-serif leading-relaxed">
             1社だけに売ることは、大切な資産に対する最大の「裏切り」です。
         </p>
     </section>
 
-    <!-- 4. 価格交渉エージェントとしての存在意義 -->
     <section class="px-6 md:px-16 py-16 bg-gold-50 border-b border-gold-100">
         <h2 class="font-serif text-2xl text-center text-slate-900 mb-2 font-bold">価格交渉代行とは</h2>
         <p class="text-center text-gold-500 font-serif tracking-widest text-xs font-bold mb-10">THE REAL VALUE</p>
         
-        <div class="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-xl border gold-frame mb-10 text-sm md:text-base leading-relaxed shadow-sm">
-            <p class="font-bold text-center text-gold-600 text-base md:text-lg mb-4">
-                「弊社が高価買取するわけではありません」
-            </p>
-            <p class="text-gray-600 text-center leading-relaxed prevent-split">
-                私たちは買取店のように商品を買い叩く業者ではなく、あなた側の立場に立つ「価格交渉のエージェント（代理人）」です。商品を正しく市場に出せば、正当な金額で売れる。そのための「正しい情報」と「特別なルート」に価値をお支払いいただきます。
-            </p>
+        <div class="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-2xl border gold-frame shadow-sm space-y-8">
+            <div class="max-w-3xl mx-auto text-center space-y-4">
+                <p class="font-bold text-gold-600 text-base md:text-xl">
+                    「弊社が高価買取するわけではありません」
+                </p>
+                <p class="text-gray-600 leading-relaxed text-xs md:text-sm prevent-split text-left md:text-center">
+                    私たちは買取店のように商品を買い叩く業者ではなく、あなた側の立場に立つ「価格交渉のエージェント（代理人）」です。商品を正しく市場に出せば、正当な金額で売れる。そのための「正しい情報」と「特別なルート」に価値をお支払いいただきます。
+                </p>
+            </div>
+            <div class="max-w-3xl mx-auto bg-slate-50/50 rounded-xl p-4 md:p-6 border border-gold-100/60 flex items-center justify-center">
+                <img src="img/IMG_sakusei4.png" onerror="this.src='https://placehold.co/800x400/faf6f0/c5a880?text=Business+Flow+Infographic'" alt="価格交渉の仕組み図解" class="w-full h-auto max-h-[380px] object-contain">
+            </div>
         </div>
     </section>
 
-    <!-- 5. 衝撃の実績セクション (★5枚の実績写真＋追加分ダイヤの計6枚をグリッド形式で美しく配列) -->
     <section class="px-6 md:px-16 py-16 bg-white text-center border-b border-slate-100">
         <h2 class="font-serif text-xl md:text-2xl text-slate-900 mb-2 tracking-wide font-bold">他社査定額を破壊した「圧倒的実績」</h2>
         <p class="text-xs text-gray-500 mb-10">※これほどまでに業界の当初査定額には闇があります</p>
         
-        <!-- 実績グリッドコンテナ -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             
-            <!-- 実績1: デイトナ -->
             <div class="bg-gold-50 border-2 border-gold-200 rounded-2xl overflow-hidden p-5 shadow-sm flex flex-col justify-between">
                 <div>
                     <div class="w-full h-48 bg-white rounded-xl overflow-hidden flex items-center justify-center border border-gold-100 shadow-inner mb-4">
@@ -274,7 +308,6 @@
                 </div>
             </div>
 
-            <!-- 実績2: GMTマスターII -->
             <div class="bg-gold-50 border-2 border-gold-200 rounded-2xl overflow-hidden p-5 shadow-sm flex flex-col justify-between">
                 <div>
                     <div class="w-full h-48 bg-white rounded-xl overflow-hidden flex items-center justify-center border border-gold-100 shadow-inner mb-4">
@@ -303,7 +336,6 @@
                 </div>
             </div>
 
-            <!-- 実績3: デイトジャスト シルバー -->
             <div class="bg-gold-50 border-2 border-gold-200 rounded-2xl overflow-hidden p-5 shadow-sm flex flex-col justify-between">
                 <div>
                     <div class="w-full h-48 bg-white rounded-xl overflow-hidden flex items-center justify-center border border-gold-100 shadow-inner mb-4">
@@ -332,7 +364,6 @@
                 </div>
             </div>
 
-            <!-- 実績4: デイトジャスト コンビ -->
             <div class="bg-gold-50 border-2 border-gold-200 rounded-2xl overflow-hidden p-5 shadow-sm flex flex-col justify-between">
                 <div>
                     <div class="w-full h-48 bg-white rounded-xl overflow-hidden flex items-center justify-center border border-gold-100 shadow-inner mb-4">
@@ -361,7 +392,6 @@
                 </div>
             </div>
 
-            <!-- 実績5: K18サファイアネックレス -->
             <div class="bg-gold-50 border-2 border-gold-200 rounded-2xl overflow-hidden p-5 shadow-sm flex flex-col justify-between">
                 <div>
                     <div class="w-full h-48 bg-white rounded-xl overflow-hidden flex items-center justify-center border border-gold-100 shadow-inner mb-4">
@@ -390,7 +420,6 @@
                 </div>
             </div>
 
-            <!-- 実績6: ダイヤモンドリング (追加分) -->
             <div class="bg-gold-50 border-2 border-gold-200 rounded-2xl overflow-hidden p-5 shadow-sm flex flex-col justify-between">
                 <div>
                     <div class="w-full h-48 bg-white rounded-xl overflow-hidden flex items-center justify-center border border-gold-100 shadow-inner mb-4">
@@ -426,24 +455,26 @@
         </p>
     </section>
 
-    <!-- 6. 完全成功報酬型の手数料システム -->
     <section class="px-6 md:px-16 py-16 bg-gold-50 border-b border-gold-100">
         <h2 class="font-serif text-2xl text-center text-slate-900 mb-2 font-bold">完全成功報酬型の手数料システム</h2>
         <p class="text-center text-gold-500 font-serif tracking-widest text-xs font-bold mb-8">COMMISSION FEE</p>
         
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 max-w-4xl mx-auto items-center">
             
-            <div class="md:col-span-5 text-xs md:text-sm text-gray-600 leading-relaxed">
-                <p class="font-bold text-slate-900 text-base mb-4">お客様が持ち出しで損をすることは、絶対にありません。</p>
-                <p class="mb-4">
+            <div class="md:col-span-5 text-xs md:text-sm text-gray-600 leading-relaxed space-y-4">
+                <p class="font-bold text-slate-900 text-base">お客様が持ち出しで損をすることは、絶対にありません。</p>
+                <p>
                     他社での事前査定額がある場合、**「ALL ONEが交渉してアップした【差額分】」**からのみ成功報酬として手数料をいただきます。
                 </p>
                 <p>
                     手取り金額がアップした時だけ手数料をいただくシステムのため、損をすることは1円もありません。
                 </p>
+                
+                <div class="w-full h-44 bg-white rounded-xl overflow-hidden border border-gold-200 shadow-inner mt-4">
+                    <img src="img/IMG_sakusei5.png" onerror="this.src='https://placehold.co/500x350/ffffff/c5a880?text=Wealth+and+Asset+Image'" alt="資産価値向上イメージ" class="w-full h-full object-cover">
+                </div>
             </div>
 
-            <!-- 手数料テーブル -->
             <div class="md:col-span-7 border border-gold-200 rounded-xl overflow-hidden shadow-md w-full bg-white">
                 <table class="w-full text-left border-collapse">
                     <thead>
@@ -477,48 +508,67 @@
         <p class="text-xs text-gray-500 text-center mt-6">※弊社が1回目の査定（他社査定がない状態）の場合、提示した買取相場額にご納得いただければ手数料なしでそのまま現金買取いたします。</p>
     </section>
 
-    <!-- 7. ご利用の流れ -->
     <section class="px-6 md:px-16 py-16 bg-white">
-        <h2 class="font-serif text-2xl text-center text-slate-900 mb-8 font-bold">LINE成約までの4ステップ</h2>
+        <h2 class="font-serif text-2xl md:text-3xl text-center text-slate-900 mb-10 font-bold">LINE成約までの4ステップ</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             
-            <div class="flex items-center space-x-4 bg-gold-50 p-4 rounded-xl border border-gold-100 shadow-sm">
-                <div class="bg-gold-400 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">1</div>
-                <div>
-                    <h3 class="font-bold text-xs md:text-sm text-slate-900">公式LINEへ登録し、写真を送信</h3>
-                    <p class="text-[11px] text-gray-500 mt-0.5">売りたいお宝（時計や宝飾品）の写真をスマホで撮って送るだけです。</p>
+            <div class="bg-gold-50 p-6 md:p-8 rounded-2xl border border-gold-200/80 shadow-md flex flex-col justify-between transition-all hover:shadow-lg">
+                <div class="w-full h-44 md:h-56 bg-white rounded-xl overflow-hidden mb-5 border border-gold-100 flex items-center justify-center p-3">
+                    <img src="img/IMG_step1.png" onerror="this.src='https://placehold.co/400x200/ffffff/c5a880?text=Step+1+Image'" alt="写真をスマホで送る" class="w-full h-full object-contain">
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-gold-400 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm md:text-base mt-0.5">1</div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-base md:text-lg text-slate-900">公式LINEへ登録、写真を送信</h3>
+                        <p class="text-sm md:text-base text-gray-700 mt-2 leading-relaxed">売りたいお宝の写真をスマホで撮って送るだけです。</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex items-center space-x-4 bg-gold-50 p-4 rounded-xl border border-gold-100 shadow-sm">
-                <div class="bg-gold-400 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">2</div>
-                <div>
-                    <h3 class="font-bold text-xs md:text-sm text-slate-900">最高値の売り先（ルート）の選定</h3>
-                    <p class="text-[11px] text-gray-500 mt-0.5">業界10年のエージェントが、あなたの代わりに各取引先と価格交渉を代行。</p>
+            <!-- IMG_step2.jpg に修正 -->
+            <div class="bg-gold-50 p-6 md:p-8 rounded-2xl border border-gold-200/80 shadow-md flex flex-col justify-between transition-all hover:shadow-lg">
+                <div class="w-full h-44 md:h-56 bg-white rounded-xl overflow-hidden mb-5 border border-gold-100 flex items-center justify-center p-3">
+                    <img src="img/IMG_step2.jpg" onerror="this.src='https://placehold.co/400x200/ffffff/c5a880?text=Step+2+Image'" alt="売り先選定・データベース分析" class="w-full h-full object-contain">
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-gold-400 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm md:text-base mt-0.5">2</div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-base md:text-lg text-slate-900">最高値の売り先（ルート）の選定</h3>
+                        <p class="text-sm md:text-base text-gray-700 mt-2 leading-relaxed">業界10年のエージェントが各取引先と徹底的に価格交渉を代行。</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex items-center space-x-4 bg-gold-50 p-4 rounded-xl border border-gold-100 shadow-sm">
-                <div class="bg-gold-400 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">3</div>
-                <div>
-                    <h3 class="font-bold text-xs md:text-sm text-slate-900">確定した最高額のご提示</h3>
-                    <p class="text-[11px] text-gray-500 mt-0.5">交渉完了後、LINEにて「最終的な提示金額」をお伝えします。</p>
+            <div class="bg-gold-50 p-6 md:p-8 rounded-2xl border border-gold-200/80 shadow-md flex flex-col justify-between transition-all hover:shadow-lg">
+                <div class="w-full h-44 md:h-56 bg-white rounded-xl overflow-hidden mb-5 border border-gold-100 flex items-center justify-center p-3">
+                    <img src="img/IMG_step3.png" onerror="this.src='https://placehold.co/400x200/ffffff/c5a880?text=Step+3+Image'" alt="最高査定額を提示" class="w-full h-full object-contain">
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-gold-400 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm md:text-base mt-0.5">3</div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-base md:text-lg text-slate-900">確定した最高額のご提示</h3>
+                        <p class="text-sm md:text-base text-gray-700 mt-2 leading-relaxed">価格交渉完了後、LINEにて「最終的な確定提示金額」をお伝えします。</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex items-center space-x-4 bg-gold-50 p-4 rounded-xl border border-gold-100 shadow-sm">
-                <div class="bg-gold-400 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm">4</div>
-                <div>
-                    <h3 class="font-bold text-xs md:text-sm text-slate-900">成約・現金の受け渡しと商品の回収</h3>
-                    <p class="text-[11px] text-gray-500 mt-0.5">成約となりましたら、東京・神奈川エリアにて対面で現金の受け渡しと回収を行います。</p>
+            <div class="bg-gold-50 p-6 md:p-8 rounded-2xl border border-gold-200/80 shadow-md flex flex-col justify-between transition-all hover:shadow-lg">
+                <div class="w-full h-44 md:h-56 bg-white rounded-xl overflow-hidden mb-5 border border-gold-100 flex items-center justify-center p-3">
+                    <img src="img/IMG_step4.jpg" onerror="this.src='https://placehold.co/400x200/ffffff/c5a880?text=Step+4+Image'" alt="現金手渡しと回収" class="w-full h-full object-contain">
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="bg-gold-400 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm md:text-base mt-0.5">4</div>
+                    <div class="flex-1">
+                        <h3 class="font-bold text-base md:text-lg text-slate-900">成約、現金受け渡しと商品の回収</h3>
+                        <p class="text-sm md:text-base text-gray-700 mt-2 leading-relaxed">東京・神奈川エリアにて、お会いしてその場での現金払いと回収を行います。</p>
+                    </div>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <!-- 8. 最終CTA (LINE誘導) -->
     <section class="bg-gold-50 text-slate-900 px-6 md:px-16 py-16 text-center border-t-2 border-gold-400">
         <h2 class="font-serif text-xl md:text-2xl text-gold-600 mb-4 tracking-wide leading-relaxed font-bold">
             妥協して売る前に、まずは真実を知ってください。
@@ -535,19 +585,17 @@
         </div>
     </section>
 
-    <!-- フッター＆プライバシーポリシー等（信頼性担保） -->
     <footer class="bg-slate-900 text-slate-400 px-6 py-8 text-center text-[10px]">
         <div class="max-w-xl mx-auto mb-4 space-y-2 text-left bg-slate-800 p-4 rounded border border-slate-700 leading-relaxed">
             <p class="font-bold text-white text-center text-xs mb-1">【個人情報保護および免責事項】</p>
             <p>※当エージェントは価格交渉の代行を行うサービスであり、お客様からお預かりした個人情報および査定商品に関する秘密データは厳重に管理され、第三者へ開示・流出することは一切ございません（クローズドエージェント制）。</p>
-            <p>※対応エリア（東京・神奈川）外の出張対応についてはLINE内にてご相談ください。</p>
+            <p>※対応エリア（東京・神奈川）外 の出張対応についてはLINE内にてご相談ください。</p>
         </div>
         <p class="mt-6 font-sans">&copy; 2026 価格交渉代行 ALL ONE. All Rights Reserved.</p>
     </footer>
 
 </div>
 
-<!-- 9. スマホ限定追従フッターコンバージョンボタン (画面最下部に固定) -->
 <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white/95 backdrop-blur-md border-t border-gold-200 px-4 py-3 shadow-[0_-5px_15px_rgba(0,0,0,0.05)] flex items-center justify-between">
     <div class="text-left">
         <span class="block text-[10px] text-red-600 font-bold leading-none mb-1">★他社より手取りを増やしたい方限定</span>
