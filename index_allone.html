@@ -90,30 +90,32 @@
 <body class="bg-slate-100 text-slate-900 antialiased min-h-screen font-sans">
 
 <!-- メインコンテナ：PCでは最大幅5xlで両サイドに優雅なマージン、モバイルは全幅 -->
-<div class="w-full max-w-5xl mx-auto bg-white shadow-2xl overflow-hidden min-h-screen flex flex-col justify-between">
+<!-- 追従フッターと被らないよう、スマホ表示時のみ下部に十分な余白 (pb-24) を設けます -->
+<div class="w-full max-w-5xl mx-auto bg-white shadow-2xl overflow-hidden min-h-screen flex flex-col justify-between pb-24 md:pb-0">
 
     <!-- 1. ファーストビュー (FV) -->
     <header class="relative px-6 md:px-16 pt-12 pb-16 bg-luxury-light border-b gold-frame">
         
         <div class="text-center mb-4">
-            <span class="inline-block gold-badge text-gold-600 px-5 py-1 text-xs tracking-widest font-en font-bold rounded">
+            <span class="inline-block gold-badge text-gold-600 px-5 py-1 text-xs tracking-widest font-serif font-bold rounded">
                 東京都・神奈川県エリア限定
             </span>
         </div>
 
         <!-- キャッチコピー -->
         <div class="text-center max-w-3xl mx-auto mb-10">
-            <p class="text-gold-600 font-serif font-bold text-sm md:text-base tracking-widest mb-3">信頼と実績の価格交渉代行 【時計・宝飾品専門】</p>
+            <p class="text-gold-500 font-bold text-sm md:text-base tracking-widest mb-3">信頼と実績の価格交渉代行 【時計・宝飾品専門】</p>
             <h1 class="font-serif text-2xl md:text-4.5xl leading-snug md:leading-normal font-black tracking-wide text-slate-900">
                 あなたの大切な資産を<br>
                 <span class="gold-gradient-text text-3xl md:text-5.5xl block my-2 md:my-3">適正価格で最大限に。</span>
             </h1>
         </div>
 
-        <!-- メイングリッド (左: 3つの特徴 / 右: 高級イメージ写真) -->
+        <!-- メイングリッド (左: 3つの特徴 / 右: 高級ロゴ画像) -->
+        <!-- responsive order: スマホ表示時はロゴ(order-1)が上になり、3つの特徴(order-2)が下になります -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center mt-12">
             
-            <!-- 左カラム：インスタクリエイティブを踏襲した3つの強み (スマホ時は下に、PC時は左に配置) -->
+            <!-- 左カラム：インスタクリエイティブを踏襲した3つの強み -->
             <div class="md:col-span-7 space-y-5 order-2 md:order-1">
                 
                 <div class="flex items-start space-x-4 bg-white p-5 rounded-xl shadow-sm border border-gold-100">
@@ -154,9 +156,8 @@
 
             </div>
 
-            <!-- 右カラム：ロゴ画像 (IMG_2772.jpg) (スマホ時は上に、PC時は右に配置) -->
+            <!-- 右カラム：ロゴ画像 (IMG_2772.jpg) -->
             <div class="md:col-span-5 w-full h-72 md:h-96 bg-black rounded-2xl overflow-hidden border-2 border-gold-200 shadow-xl flex items-center justify-center order-1 md:order-2">
-                <!-- 実物のロゴ(IMG_2772.jpg)をフォルダに配置すると表示されます -->
                 <img src="img/IMG_2772.jpg" onerror="this.src='https://placehold.co/600x600/000000/c5a880?text=ALL+ONE'" alt="ALL ONE ロゴ" class="w-full h-full object-contain">
             </div>
 
@@ -182,7 +183,7 @@
     <!-- 2. コンセプト：インスタメッセージの美学 -->
     <section class="px-6 md:px-16 py-16 bg-gold-50 border-b border-gold-100">
         <div class="max-w-3xl mx-auto text-center border-2 border-gold-200 p-8 md:p-12 rounded-2xl bg-white shadow-sm">
-            <span class="font-en text-gold-500 text-xs tracking-widest font-bold block mb-4">ALL ONE CONCEPT</span>
+            <span class="font-serif text-gold-500 text-xs tracking-widest font-bold block mb-4">ALL ONE CONCEPT</span>
             <h3 class="font-serif text-slate-900 font-bold text-lg md:text-xl mb-6">大切なお品物を手放す際、<br>売却先によって査定額に大きな差が生じることがあります。</h3>
             
             <div class="text-xs md:text-sm text-gray-600 leading-relaxed space-y-4 text-left max-w-xl mx-auto prevent-split">
@@ -224,7 +225,7 @@
     <!-- 4. 価格交渉エージェントとしての存在意義 -->
     <section class="px-6 md:px-16 py-16 bg-gold-50 border-b border-gold-100">
         <h2 class="font-serif text-2xl text-center text-slate-900 mb-2 font-bold">価格交渉代行とは</h2>
-        <p class="text-center text-gold-500 font-en tracking-widest text-xs font-bold mb-10">THE REAL VALUE</p>
+        <p class="text-center text-gold-500 font-serif tracking-widest text-xs font-bold mb-10">THE REAL VALUE</p>
         
         <div class="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-xl border gold-frame mb-10 text-sm md:text-base leading-relaxed shadow-sm">
             <p class="font-bold text-center text-gold-600 text-base md:text-lg mb-4">
@@ -236,7 +237,7 @@
         </div>
     </section>
 
-    <!-- 5. 衝撃の実績セクション (★5枚の実績写真をグリッド形式で美しく追加) -->
+    <!-- 5. 衝撃の実績セクション (★5枚の実績写真＋追加分ダイヤの計6枚をグリッド形式で美しく配列) -->
     <section class="px-6 md:px-16 py-16 bg-white text-center border-b border-slate-100">
         <h2 class="font-serif text-xl md:text-2xl text-slate-900 mb-2 tracking-wide font-bold">他社査定額を破壊した「圧倒的実績」</h2>
         <p class="text-xs text-gray-500 mb-10">※これほどまでに業界の当初査定額には闇があります</p>
@@ -428,7 +429,7 @@
     <!-- 6. 完全成功報酬型の手数料システム -->
     <section class="px-6 md:px-16 py-16 bg-gold-50 border-b border-gold-100">
         <h2 class="font-serif text-2xl text-center text-slate-900 mb-2 font-bold">完全成功報酬型の手数料システム</h2>
-        <p class="text-center text-gold-500 font-en tracking-widest text-xs font-bold mb-8">COMMISSION FEE</p>
+        <p class="text-center text-gold-500 font-serif tracking-widest text-xs font-bold mb-8">COMMISSION FEE</p>
         
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 max-w-4xl mx-auto items-center">
             
@@ -544,6 +545,17 @@
         <p class="mt-6 font-sans">&copy; 2026 価格交渉代行 ALL ONE. All Rights Reserved.</p>
     </footer>
 
+</div>
+
+<!-- 9. スマホ限定追従フッターコンバージョンボタン (画面最下部に固定) -->
+<div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white/95 backdrop-blur-md border-t border-gold-200 px-4 py-3 shadow-[0_-5px_15px_rgba(0,0,0,0.05)] flex items-center justify-between">
+    <div class="text-left">
+        <span class="block text-[10px] text-red-600 font-bold leading-none mb-1">★他社より手取りを増やしたい方限定</span>
+        <span class="block text-xs font-bold text-slate-800">24時間いつでも無料LINE査定</span>
+    </div>
+    <a href="https://lin.ee/XJuSPN2" target="_blank" rel="noopener noreferrer" class="bg-line text-white font-bold px-5 py-3 rounded-xl text-sm btn-pulse flex items-center space-x-1 shadow-md">
+        <span>💬</span> <span>無料LINE相談</span>
+    </a>
 </div>
 
 </body>
